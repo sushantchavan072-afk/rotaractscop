@@ -14,7 +14,7 @@ const allMembers: MemberDetails[] = [
   { name: "Rtr. Pragama Magotra", position: "President", image: "https://i.ibb.co/3yp77QmS/Pragama.png&w=400&auto=format&fit=crop", category: "core" },
   { name: "Rtr. Prerna Bhilare", position: "Secretary", image: "https://i.ibb.co/9m1Zxg8q/Prerna.png&w=400&auto=format&fit=crop", category: "core" },
   { name: "Rtr. Pradnya Gaikar", position: "Vice President", image: "https://i.ibb.co/s921stS8/installation.png&w=400&auto=format&fit=crop", category: "core" },
-  { name: "Rtr. Arya Londhe", position: "Treasurer", image: "https://i.ibb.co/bgSm9CXp/Arya-londhe.png&w=400&auto=format&fit=crop", category: "core" },
+  { name: "Rtr. Arya Londhe", position: "Treasurer", image: "https://i.ibb.co/mrsKcX0H/1772863960494-1.png", category: "core" },
   { name: "Rtr. Vaishnavi Kharat", position: "IPP & Club Advisor", image: "https://i.ibb.co/cXFwjVZk/Whats-App-Image-2026-03-04-at-17-26-57.jpg&w=400&auto=format&fit=crop", category: "core" },
 
   // Board of Directors
