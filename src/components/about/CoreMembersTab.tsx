@@ -16,35 +16,35 @@ const coreMembers = [
   {
     name: "Rtr. Pragama Magotra",
     position: "President",
-    joiningDate: "March 2024",
+    joiningDate: "June 2025",
     message:
       "As President, I am committed to leading our club towards greater heights of service and fellowship.",
   },
   {
     name: "Rtr. Prerna Bhilare",
     position: "Secretary",
-    joiningDate: "March 2024",
+    joiningDate: "June 2025",
     message:
       "Dedicated to ensuring smooth operations and effective communication within our club.",
   },
   {
     name: "Rtr. Pradnya Gaikar",
     position: "Vice President",
-    joiningDate: "March 2024",
+    joiningDate: "June 2025",
     message:
       "Supporting our President and ensuring continuity in our club's vision and mission.",
   },
   {
     name: "Rtr. Arya Londhe",
     position: "Treasurer",
-    joiningDate: "March 2024",
+    joiningDate: "June 2025",
     message:
       "Managing our club's finances with transparency and responsibility.",
   },
   {
     name: "Rtr. Vaishnavi Kharat",
     position: "IPP & Club Advisor",
-    joiningDate: "March 2024",
+    joiningDate: "June 2025",
     message:
       "Guiding our club with experience and wisdom from past leadership.",
   },
