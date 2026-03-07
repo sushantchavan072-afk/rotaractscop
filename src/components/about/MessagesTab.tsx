@@ -41,7 +41,7 @@ export const leaders: Leader[] = [
     message: "To my Dearest friends in Rotaract,\n\nAs I pen this message, my heart brims with gratitude and pride. Serving as the District Rotaract Representative of RID 3131 has been nothing short of a transformative journey, one that took me from the vibrant city of Pune to the snow-clad terrains of Kashmir, where I stood not as a tourist, but as a volunteer at a Rotary Mega Surgical Project. That moment, amidst the Himalayan silence, I witnessed the truest essence of Rotaract; seva beyond self, borders, and comfort.\n\nDear Rotaractors, always remember: titles fade, but impact remains. Lead with purpose, serve with compassion, and carry the AURA of this movement with pride as Rotaractors Unite for Development, Reach and Action.\n\nIn fellowship and service,\nPHF IPDRR Drishti Singh\nImmediate Past DRR, RID 3131 | District Learning Facilitator – RIY 2025-26",
   },
   {
-    name: "PHF Rtr. Niharika Chaturvedi",
+    name: "PHF Rtr. Atharva Patil",
     title: "District General Secretary",
     photo: dgsPhoto,
     message: "\"Your life does not get better by chance, it gets better by change.\" — Jim Rohn\n\nDear Changemakers,\n\nA brand new Rotaract year is upon us—and with it, a fresh canvas to dream bigger, serve louder, and lead stronger!\n\nThis year, we embrace AURA—Adapt, Unite, Resilience, Aspire—as more than just a theme; it's a mindset that will define how we grow, serve, and lead.\n\nThe future is ours to shape—let's make it count!\n\nWarm regards,\nRtr. Niharika Chaturvedi\nDistrict General Secretary\nRotaract District Organisation of Rotary International District 3131",
