@@ -18,7 +18,7 @@ const coreMembers = [
     position: "President",
     joiningDate: "June 2025",
     message:
-      "[21:21, 04/03/2026] Pragama: Pragama: As the President, I see leadership as a commitment to serve with integrity, lead with vision, and stand firmly with my team. I am dedicated to fostering transparency, encouraging innovation, and creating opportunities where every member can grow and contribute meaningfully. Together, we will not only achieve our goals but set new benchmarks of excellence and impact. ",
+      "Pragama: As the President, I see leadership as a commitment to serve with integrity, lead with vision, and stand firmly with my team. I am dedicated to fostering transparency, encouraging innovation, and creating opportunities where every member can grow and contribute meaningfully. Together, we will not only achieve our goals but set new benchmarks of excellence and impact. ",
   },
   {
     name: "Rtr. Prerna Bhilare",
