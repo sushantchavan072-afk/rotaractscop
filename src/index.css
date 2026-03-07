@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gold & Navy design system — stronger contrast. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 45 25% 96%;
+    --foreground: 220 40% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 40% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 40% 10%;
+
+    --primary: 40 85% 48%;
+    --primary-foreground: 220 50% 8%;
+
+    --secondary: 42 35% 91%;
+    --secondary-foreground: 220 35% 18%;
+
+    --muted: 42 18% 93%;
+    --muted-foreground: 220 12% 40%;
+
+    --accent: 42 40% 88%;
+    --accent-foreground: 220 35% 12%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 42 18% 85%;
+    --input: 42 18% 85%;
+    --ring: 40 85% 48%;
+
+    --radius: 0.75rem;
+
+    --gradient-bg: linear-gradient(135deg, hsl(45, 25%, 96%) 0%, hsl(40, 30%, 93%) 50%, hsl(38, 20%, 95%) 100%);
+    --gradient-hero: linear-gradient(120deg, hsl(220, 45%, 15%) 0%, hsl(220, 40%, 25%) 100%);
+    --shadow-card: 0 4px 20px -2px hsl(40 85% 48% / 0.1);
+    --shadow-hover: 0 8px 30px -4px hsl(40 85% 48% / 0.18);
+  }
+
+  .dark {
+    --background: 222 40% 6%;
+    --foreground: 42 25% 95%;
+
+    --card: 222 35% 10%;
+    --card-foreground: 42 25% 95%;
+
+    --popover: 222 35% 10%;
+    --popover-foreground: 42 25% 95%;
+
+    --primary: 40 90% 52%;
+    --primary-foreground: 222 50% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 42 20% 90%;
+
+    --muted: 222 28% 14%;
+    --muted-foreground: 222 12% 50%;
+
+    --accent: 222 28% 16%;
+    --accent-foreground: 42 20% 90%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 42 25% 95%;
+
+    --border: 222 28% 16%;
+    --input: 222 28% 16%;
+    --ring: 40 90% 52%;
+
+    --gradient-bg: linear-gradient(135deg, hsl(222, 40%, 6%) 0%, hsl(222, 35%, 9%) 100%);
+    --gradient-hero: linear-gradient(120deg, hsl(40, 90%, 52%) 0%, hsl(38, 80%, 58%) 100%);
+    --shadow-card: 0 4px 20px -2px hsl(40 90% 52% / 0.18);
+    --shadow-hover: 0 8px 30px -4px hsl(40 90% 52% / 0.28);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
