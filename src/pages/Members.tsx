@@ -42,8 +42,8 @@ const allMembers: MemberDetails[] = [
   { name: "Rtr. Milind Singh Rajput", position: "General Body Member", image: "https://i.ibb.co/FqCbCVPR/Gemini-Generated-Image-tc9m32tc9m32tc9m.png&w=400&auto=format&fit=crop", category: "general" },
   { name: "Rtr. Priya Hangarge", position: "General Body Member", image: "https://i.ibb.co/7xkpsFGF/Gemini-Generated-Image-tle599tle599tle5.png&w=400&auto=format&fit=crop", category: "general" },
   { name: "Rtr. Adnya Jadhav", position: "General Body Member", image: "https://i.ibb.co/wtV3h7V/f0437adb-3839-48de-8d96-08cfa85357c7.jpg&w=400&auto=format&fit=crop", category: "general" },
-  { name: "Rtr. Utkarsh Garde", position: "General Body Member", image: "https://i.ibb.co/BV3R09VP/SAVE-20250828-110804-Prerana-Gade.jpg&w=400&auto=format&fit=crop", category: "general" },
-  { name: "Rtr. Prerna Gade", position: "General Body Member", image: "https://i.ibb.co/wtV3h7V/f0437adb-3839-48de-8d96-08cfa85357c7.jpg&w=400&auto=format&fit=crop", category: "general" },
+  { name: "Rtr. Utkarsh Garde", position: "General Body Member", image: "https://i.ibb.co/qY0YCM4k/IMG-20250828-115734-Utkarsh-Garde.jpg", category: "general" },
+  { name: "Rtr. Prerna Gade", position: "General Body Member", image: "https://i.ibb.co/BV3R09VP/SAVE-20250828-110804-Prerana-Gade.jpg", category: "general" },
   { name: "Rtr. Revati Kulal", position: "General Body Member", image: "https://i.ibb.co/1YjRvf01/Gemini-Generated-Image-qxviejqxviejqxvi.png&w=400&auto=format&fit=crop", category: "general" },
   { name: "Rtr. Prathamesh", position: "General Body Member", image: "https://i.ibb.co/846yM3Gd/IMG-1101-pratham-dhatrak.jpg&w=400&auto=format&fit=crop", category: "general" },
 ];
