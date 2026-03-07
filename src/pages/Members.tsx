@@ -32,7 +32,7 @@ const allMembers: MemberDetails[] = [
   { name: "Rtr. Bhumi Sharma", position: "Sports Director", image: "https://i.ibb.co/MDxHc4jw/Bhumi.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Aditi Gandhi", position: "RRRO & IRRO", image: "https://i.ibb.co/4RYmWnK2/Aditi-gandhi.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Jagruti Dave", position: "DEI Representative", image: "https://i.ibb.co/MDLYdBwd/Jagruti.png&w=400&auto=format&fit=crop", category: "bod" },
-
+  { name: "Rtr. Palak Kumari", position: "WRWC", image: "https://i.ibb.co/60t3Jp1J/palak.jpg", category: "bod" },
   // General Body Members
   { name: "Rtr. Chaitrali Dave", position: "General Body Member", image: "https://i.ibb.co/v6GPxzSp/Gemini-Generated-Image-hkwumihkwumihkwu.png&w=400&auto=format&fit=crop", category: "general" },
   { name: "Rtr. Pranjal Mate", position: "General Body Member", image: "https://i.ibb.co/cc8s1Fbk/Screenshot-20250705-160930-Pranjal-Mate.jpg&w=400&auto=format&fit=crop", category: "general" },
