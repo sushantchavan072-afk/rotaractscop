@@ -78,7 +78,7 @@ const Footer = () => {
           </div>
 
           <div className="hidden md:flex items-center justify-center flex-1">
-            <img src={logo} alt="Rotaract Club Logo" className="w-50 h-50 lg:w-100 lg:h-80 object-contain opacity-70" />
+            <img src={logo} alt="" className="w-50 h-50 lg:w-100 lg:h-80 object-contain opacity-70" />
           </div>
         </div>
 
