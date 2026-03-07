@@ -373,7 +373,7 @@ const EVENTS_DATA = [
   },
   {
     title: "Tomorrow’s Peacemakers",
-    date: "January 17, 2025",
+    date: "January 17, 2026",
     month: "January",
     time: "9:30 PM to 10:30 PM",
     avenue: "CMD",
@@ -385,7 +385,7 @@ const EVENTS_DATA = [
   },
   {
     title: "Sneha – Clothes Donation Drive",
-    date: "January 18, 2025",
+    date: "January 18, 2026",
     month: "January",
     time: "03:00 PM to 03:55 PM",
     avenue: "CMD, ISD",
@@ -397,7 +397,7 @@ const EVENTS_DATA = [
   },
   {
     title: "Where Diversity Meets Design",
-    date: "January 21, 2025",
+    date: "January 21, 2026",
     month: "January",
     time: "11:00 AM to 02:30 PM",
     avenue: "DEI",
@@ -409,7 +409,7 @@ const EVENTS_DATA = [
   },
   {
     title: "Pottery Workshop",
-    date: "January 24, 2025",
+    date: "January 24, 2026",
     month: "January",
     time: "12:30 PM to 03:00 PM",
     avenue: "CSD",
@@ -421,7 +421,7 @@ const EVENTS_DATA = [
   },
    {
     title: "Fun Brew",
-    date: "January 27, 2025",
+    date: "January 27, 2026",
     month: "January",
     time: "02:00 PM to 05:30 PM",
     avenue: "CSD",
@@ -433,7 +433,7 @@ const EVENTS_DATA = [
   },
    {
     title: "Trip Nova",
-    date: "January 29, 2025",
+    date: "January 29, 2026",
     month: "January",
     time: "08:05 PM to 09:00 PM",
     avenue: "PDD",
@@ -445,7 +445,7 @@ const EVENTS_DATA = [
   },
    {
     title: "Rota Bond",
-    date: "January 30, 2025",
+    date: "January 30, 2026",
     month: "January",
     time: "04:00 PM to 5:30 PM",
     avenue: "RRRO",
@@ -457,7 +457,7 @@ const EVENTS_DATA = [
   },
    {
     title: "ConvoCraft",
-    date: "February 27, 2025",
+    date: "February 27, 2026",
     month: "February",
     time: "05:00 PM to 06:30 PM",
     avenue: "PDD",
