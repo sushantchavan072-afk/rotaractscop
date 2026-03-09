@@ -21,7 +21,7 @@ const allMembers: MemberDetails[] = [
   { name: "Rtr. Urvashi Chaudhari", position: "Sergeant-At-Arms (SAA)", image: "https://i.ibb.co/6786pnT1/urvashi.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Shubhangi Kumawat", position: "Club Service Director", image: "https://i.ibb.co/0jZLSFHg/Shubhangi.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Prayag Pokale", position: "MDD", image: "https://i.ibb.co/fz2SWbfG/Prayag.jpg&w=400&auto=format&fit=crop", category: "bod" },
-  { name: "Rtr. Mrunal Potharkar", position: "CMD & Finance Director", image: "https://i.ibb.co/bRM0Fdq9/Whats-App-Image-2026-03-07-at-16-11-07.jpg", category: "bod" },
+  { name: "Rtr. Mrunal Potharkar", position: "CMD & Finance Director", image: "https://i.ibb.co/Q7JdkX4C/7b421d70-1bbf-11f1-aa9e-114d2a34bfc6.jpg", category: "bod" },
   { name: "Rtr. Vedanti Khardikar", position: "PDD", image: "https://i.ibb.co/tMJY7GLn/Vedanti.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Arya Chavan", position: "PAO", image: "https://i.ibb.co/4ZjV3kN4/Arya-chavan.png&w=400&auto=format&fit=crop", category: "bod" },
   { name: "Rtr. Amruta Potdukhe", position: "International Service Director", image: "https://i.ibb.co/VW3dDLh1/Amruta.jpg&w=400&auto=format&fit=crop", category: "bod" },
