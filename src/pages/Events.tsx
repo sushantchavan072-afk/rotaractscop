@@ -635,6 +635,30 @@ export const EVENTS_DATA = [
     description: "Spark Tank, organized by Rotaract Club of Sinhgad College of Pharmacy in collaboration with Rotary Club of Pune Nanded City and co host clubs RaC Pune Royal and RaC Pune Pristine Paradise, was a dynamic platform empowering 70+ beneficiaries including participants, students, Rotaractors, and volunteers. The event enabled aspiring entrepreneurs to pitch innovative ideas before an esteemed panel of professionals and industry leaders, receiving valuable mentorship, feedback, and motivation. Winners were honored with cash prizes, trophies, and certificates. Beyond entrepreneurship, Spark Tank fostered networking, sponsorship opportunities, and promoted a Go Green initiative, making it a successful and impactful milestone.",
     image: "https://i.ibb.co/TqMMVtK3/20260509-154908-1.jpg",
   },
+  {
+    title: "MahaWorld Insights",
+    date: "May 10, 2026",
+    month: "May",
+    time: "5:00 PM to 6:00 PM",
+    avenue: "ISD",
+    location: "Google Meet",
+    attendees: "14",
+    status: "Past",
+    description: "A collaborative meeting was conducted with where both clubs exchanged informative insights on significant occasions. The members of KC College shared valuable insights on World Day celebrations, while our club presented insights on Maharashtra Day, emphasizing its cultural importance and heritage. Further, as a part of the engagement activity, an online painting session was organized at 7:00 PM to encourage creativity, participation, and fellowshipamong the members. The session witnessed enthusiastic involvement and strengthened the bond between both clubs through meaningful interaction and teamwork.",
+    image: "https://i.ibb.co/nsXFBtM4/Whats-App-Image-2026-05-19-at-17-39-28.jpg",
+  },
+  {
+    title: "Rotaract Rasoi",
+    date: "May 13-15, 2026",
+    month: "May",
+    time: "N/A",
+    avenue: "ISD, PRO, DEI",
+    location: "Instagram",
+    attendees: "05",
+    status: "Past",
+    description: "Rotaract Rasoi was an inter-club fellowship event organized to promote bonding, creativity, and cultural exchange among Rotaractors through food and interaction. Members enthusiastically participated by preparing and presenting different dishes while sharing their culinary experiences and traditions. The event created a fun and engaging atmosphere that strengthened teamwork, communication, and friendship between clubs. It also encouraged active participation and collaboration among members from different districts. The project was successfully conducted in collaboration with Rotaract Club of Sinhgad College of Pharmacy, Rotaract Club of Pune City Fortune, Rotaract Club of Kolhapur Midtown Phoenix, Rotaract Club of Pune Westside, and Rotaract Club of Pune Pristine Paradise.",
+    image: "https://i.ibb.co/t7HvCxx/photo-collage-png.png",
+  },
 ];
 
 // =====================================================
