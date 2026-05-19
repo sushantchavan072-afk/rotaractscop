@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock, Tag } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 
 // =====================================================
@@ -419,7 +419,7 @@ export const EVENTS_DATA = [
     description: "Under the Club Service Avenue, our members rolled up their sleeves and got their hands beautifully dirty at an engaging Pottery Making Workshop! From shaping elegant pots to crafting decorative plates and more, members discovered the meditative joy of working with clay, channeling their creativity into tangible works of art. Beyond the craft itself, the workshop became a wonderful space for members to laugh and bond - strengthening friendships and club camaraderie in the most organic way possible. The rhythmic whirl of the potter's wheel and the earthy texture of clay created an atmosphere that was both calming and exhilarating. A perfect blend of creativity, mindfulness, and togetherness - the workshop reminded everyone that sometimes, the best connections are made when we create something with our own hands.",
     image: "https://i.ibb.co/v6rKyvgp/Whats-App-Image-2026-03-05-at-15-58-37.jpg",
   },
-   {
+  {
     title: "Fun Brew",
     date: "January 27, 2026",
     month: "January",
@@ -431,7 +431,7 @@ export const EVENTS_DATA = [
     description: "Under the CSD Avenue, members gathered for a delightful Fun Brew evening - sipping on warm cups of coffee and tea while engaging in lighthearted conversations and fun games. It was a relaxed, joyful setting that brought members closer, sparked laughter, and strengthened bonds over the simplest of pleasures - good company and a great brew!",
     image: "https://i.ibb.co/xKZ1PdfL/fb.jpg",
   },
-   {
+  {
     title: "Trip Nova",
     date: "January 29, 2026",
     month: "January",
@@ -443,7 +443,7 @@ export const EVENTS_DATA = [
     description: "Under the PDD Avenue, members embarked on a wonderful journey - without leaving the room! In this engaging storytelling session, members shared their personal travel experiences, from thrilling adventures and breathtaking destinations to unexpected mishaps and cherished memories. Every story opened a window to a different world, sparking wanderlust, laughter, and meaningful conversations. It was an evening filled with vivid tales that brought members closer through the universal love of exploration.",
     image: "https://i.ibb.co/4nfK91RH/tn.jpg",
   },
-   {
+  {
     title: "Rota Bond",
     date: "January 30, 2026",
     month: "January",
@@ -455,7 +455,7 @@ export const EVENTS_DATA = [
     description: "our members came together with their sponsoring Rotary members for a vibrant and engaging interaction session, organised by the Rotary Rotaract Relations Officer. Through fun games and exciting activities, both Rotary and Rotaract members bonded, shared laughs, and forged stronger inter-club relationships. The event provided a wonderful platform for members to connect with their Rotary mentors beyond formalities, fostering a sense of belonging, mutual respect, and a shared passion for service - truly celebrating the spirit of the Rotary family.",
     image: "https://i.ibb.co/ZR8rtQn4/rr.jpg",
   },
-   {
+  {
     title: "ConvoCraft",
     date: "February 27, 2026",
     month: "February",
@@ -471,169 +471,169 @@ export const EVENTS_DATA = [
     title: "DSM: Indoor",
     date: "February 28, 2026",
     month: "February",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
+    time: "Day 1 9:45 AM - 8 PM, Day 2 11:00 AM - 6:30 PM",
+    avenue: "District",
+    location: "Solaris Sports Club, Kothrud, Pune.",
     attendees: "0",
     status: "Past",
-    description: "An exciting indoor sports tournament bringing together members for a day of friendly competition, strategic games, and team bonding. A perfect opportunity to showcase agility and sportsmanship in a fun environment.",
-    image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?q=80&w=1600&auto=format&fit=crop",
+    description: "The District Sports Meet: Indoor Rotaplex is a thrilling showcase of energy, skill, and fellowship. Rotaractors from across the district gather in a vibrant indoor arena to compete in exciting games like running, bunny race, three legged race, swimming, carrom, badminton, UNO, table tennis, and chess. Each contest highlights agility, focus, and teamwork, while fostering camaraderie and healthy competition. With cheering squads, lively matches, and nail biting finishes, the atmosphere is charged with enthusiasm. Beyond the games, the event builds unity and spirit, making Rotaplex not just a sports meet but a celebration of passion, friendship, and Rotaract pride.",
+    image: "https://firebasestorage.googleapis.com/v0/b/rotaractdistrict3131-1154d.appspot.com/o/eventImg%2FZy4NORoaami0U9F72Gww?alt=media&token=09aed88e-7bdd-4bb0-af98-a012f17840c7",
   },
   {
     title: "Prerna",
     date: "March 09, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "8:00 PM to 9:20 PM",
+    avenue: "DEI",
+    location: "Google Meet (online)",
+    attendees: "18",
     status: "Past",
-    description: "An inspiring session dedicated to empowerment, motivation, and sharing transformative stories. We heard from incredible speakers who motivated us to break barriers and strive for excellence in all walks of life.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop",
+    description: "Prerna – DEI: Was a heartfelt gathering where Rotaractors came together to celebrate women who inspire and empower. Conducted under the DEI initiative, the event created a safe and inclusive space for participants to share personal stories about the women who shaped their lives; be it mentors, family members, or role models. Each testimony reflected admiration, gratitude, and the impact of women in fostering resilience and leadership. The forum encouraged dialogue, strengthened fellowship, and highlighted the importance of diversity, equity, and inclusion. It was not just an event, but a collective tribute to women’s influence and legacy.",
+    image: "https://i.ibb.co/fd50dyMf/Screenshot-2026-05-19-104737.png",
   },
   {
     title: "Persona Polished",
     date: "March 10, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "7:00 PM to 8:45 PM",
+    avenue: "PDD, DEI, WRWC",
+    location: "Google Meet",
+    attendees: "14",
     status: "Past",
-    description: "A comprehensive personality development and grooming workshop designed to boost self-confidence, improve communication skills, and help members present their best professional selves to the world.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop",
+    description: "The Persona Polished – PDD Event was an enriching professional development session designed to refine communication and leadership skills. Conducted online, it featured inspiring talks by distinguished speakers Rtn. Mrs. Sanjivani Tope and Rtn. Mr. Anant Tope, who guided Rotaractors on self presentation, confidence building, and effective goal setting. Interactive activities encouraged participants to practice introductions and set personal milestones, making the session both practical and engaging. With protocols, fellowship, and open forum discussions, the event fostered learning and collaboration. It concluded with gratitude and reflections, leaving attendees motivated to polish their persona and embrace growth with renewed clarity.",
+    image: "https://i.ibb.co/VcdC604T/Screen-Recording-20260310-200306-Gmail-7.jpg",
   },
   {
-    title: "Rotary Rotaract joint meeting",
+    title: "Rotary Rotaract Joint Meeting",
     date: "March 11, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "7:00 PM to 9:00 PM",
+    avenue: "RRRO",
+    location: "Nanded City, Pune",
+    attendees: "12",
     status: "Past",
-    description: "A collaborative gathering between Rotary and Rotaract members to foster mentorship, discuss joint community service projects, and strengthen the bonds within our wider Rotary family.",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1600&auto=format&fit=crop",
+    description: "The RRRO Joint Meet was a significant fellowship hosted at Destination Centre, proudly supported by our sponsor club, Rotary Club of Pune Nanded City. The gathering brought Rotaractors and Rotarians together to strengthen bonds and share perspectives. Members introduced themselves, fostering connection and collaboration across both groups. A highlight was the introduction of the President Elect to the Rotary Board of Directors, followed by a presentation of vision and future plans for the year ahead. With secretarial announcements, vote of thanks, and an engaging open forum, the meet concluded in fellowship, embodying unity, collaboration, and shared purpose between Rotary and Rotaract.",
+    image: "https://i.ibb.co/JjvDzq2G/Whats-App-Image-2026-05-19-at-11-24-01.jpg",
   },
   {
     title: "Mahadaan",
     date: "March 12, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "8:00 AM to 8:00 PM",
+    avenue: "CMD, WRWC",
+    location: "Janakalyan Blood Bank, Pune",
+    attendees: "15",
     status: "Past",
-    description: "Our flagship mega blood donation drive aimed at saving lives and serving the community. Dozens of donors stepped up to contribute, showcasing the true spirit of selflessness and humanity.",
-    image: "https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=1600&auto=format&fit=crop",
+    description: "The Mahadaan – Was a full day blood donation drive organized at Janakalyan Blood Bank, dedicated to promoting the spirit of service and compassion. The event began with formal proceedings and a short awareness session highlighting the importance of blood donation. Hemoglobin testing ensured safe participation, followed by the commencement of donations. Rotaractors and volunteers came together to contribute selflessly, resulting in the successful collection of six units of blood. With structured coordination, secretarial announcements, and a heartfelt vote of thanks, the event concluded on a note of gratitude. Mahadaan truly embodied community service, fellowship, and humanitarian commitment.",
+    image: "https://i.ibb.co/CKMmQ3SS/Whats-App-Image-2026-05-19-at-11-22-28.jpg",
   },
   {
     title: "Rx Connect",
     date: "March 13, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "10:00 AM to 12:00 PM",
+    avenue: "PAO",
+    location: "Sinhgad Institutes Campus, Vadgaon bk, Pune",
+    attendees: "14",
     status: "Past",
-    description: "A premier networking and knowledge-sharing event specifically tailored for pharmacy and healthcare students. Featured expert insights on the future of medicine, industry trends, and career pathways.",
-    image: "https://images.unsplash.com/photo-1585435557343-3b092031a831?q=80&w=1600&auto=format&fit=crop",
+    description: "The Rx Connect – Was an engaging pharma themed treasure hunt that brought together six enthusiastic teams to test their wit, teamwork, and knowledge. Hosted at SCOP, the event began with formal proceedings and rules, followed by the commencement of the hunt. Participants navigated clues and challenges rooted in pharmaceutical concepts, making the competition both educational and exciting. The highlight came when one team  discovered the coveted Golden Scroll, securing victory in a spirited finish. With structured coordination, open forum discussions, and a heartfelt vote of thanks, Rx Connect concluded as a dynamic blend of learning, fun, and fellowship.",
+    image: "https://i.ibb.co/4gZwQthw/Whats-App-Image-2026-05-19-at-10-58-42.jpg",
   },
   {
     title: "Pages of Hope",
     date: "March 14, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "2:00 PM to 3:30 PM",
+    avenue: "ISD, CMD",
+    location: "Sinhgad College Of Pharmacy, Vadgaon bk , Pune",
+    attendees: "13",
     status: "Past",
-    description: "A heartwarming book donation and literacy drive. We collected and distributed educational materials to underprivileged children, spreading the joy of reading and supporting their educational journey.",
-    image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1600&auto=format&fit=crop",
+    description: "The Pages of Hope – Was a meaningful initiative dedicated to spreading knowledge and compassion through book donation. Hosted at SCOP, the event began with formal proceedings and quickly moved into the collection of donated books from members and supporters. These books were then distributed to those in need, symbolizing the gift of learning and hope. A photo session captured the spirit of generosity, followed by prize distribution for winners of Rx Connect. With a heartfelt vote of thanks and fellowship, the event concluded as a celebration of service, education, and the enduring impact of Rotaract.",
+    image: "https://i.ibb.co/JfsdyQn/Whats-App-Image-2026-05-19-at-11-40-19.jpg",
   },
   {
     title: "Rotasmash",
     date: "March 15, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "8:00 AM to 10:00 AM",
+    avenue: "CSD",
+    location: "Panchsheel Sports Club, Pune",
+    attendees: "19",
     status: "Past",
-    description: "An energetic badminton tournament full of thrilling rallies and intense matches. Members battled it out on the court, promoting physical fitness and healthy competition within the club.",
-    image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=1600&auto=format&fit=crop",
+    description: "The RotaSmash – Was an energetic badminton tournament hosted at a Sports Club, bringing Rotaractors together for a morning of sportsmanship and fellowship. The event began with formal proceedings, followed by an explanation of on‑court and off court rules to ensure fair play. Members were divided into two teams, and matches commenced with enthusiasm and competitive spirit. The games showcased agility, teamwork, and healthy rivalry, creating a lively atmosphere throughout. With structured coordination, a Power Minute session, and a heartfelt vote of thanks, the event concluded successfully, leaving participants inspired by the spirit of unity and sporting excellence.",
+    image: "https://i.ibb.co/Kch5kc8f/IMG-20260310-WA0075.jpg",
   },
   {
     title: "DRR Visit",
     date: "March 15, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "3:35 PM to 4:45 PM",
+    avenue: "GBM",
+    location: "Seminar Hall SCOP, Vadgaon Bk, Pune",
+    attendees: "18",
     status: "Past",
-    description: "The official visit by the District Rotaract Representative to review our club's progress, discuss future initiatives, and provide valuable guidance to our Board of Directors for the upcoming term.",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32b7?q=80&w=1600&auto=format&fit=crop",
+    description: "DRR Visit  - Was conducted at Seminar Hall, SCOP with structured Rotaract protocols and formal proceedings. Panel for the visit included PHF DRR Dwijesh Nashikkar, PHF DGEPS Atharva Patil, DCSD Rtr Suraj Surkuthla .The session included recitation of previous minutes, followed by reviews presented during the GBM, highlighting key discussions and reflections. Panelists were felicitated for their contributions, and the gathering emphasized fellowship and collective participation. A photo session and open forum added vibrancy, allowing members to share thoughts and engage meaningfully. The meeting concluded with a vote of thanks and adjournment, marking another successful GBM that strengthened organizational spirit, discipline, and the collaborative essence of Rotaract.",
+    image: "https://i.ibb.co/7xNRQ41s/IMG-20260315-WA0065.jpg",
   },
   {
     title: "Mindtalk",
     date: "March 28, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "7:00 PM to 8:45 PM",
+    avenue: "ISD",
+    location: "Google Meet Online",
+    attendees: "20",
     status: "Past",
     description: "An essential session focused on mental health awareness and emotional well-being. Guided by a professional psychologist, members engaged in open discussions about stress management and mindfulness.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1600&auto=format&fit=crop",
+    image: "https://i.ibb.co/Ng2tdVxG/Whats-App-Image-2026-05-19-at-11-03-54.jpg",
   },
   {
     title: "Jt. Meeting Sister Club Agreement",
     date: "March 30, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "9:00 PM to 10:15 PM",
+    avenue: "ISD",
+    location: "Google Meet",
+    attendees: "12",
     status: "Past",
-    description: "A historic joint meeting marking the signing of a Sister Club Agreement. We exchanged letterheads and promised to collaborate on future projects, bridging the gap between our respective regions.",
-    image: "https://images.unsplash.com/photo-1554200876-56c2f25224fa?q=80&w=1600&auto=format&fit=crop",
+    description: "The Joint Twin Club  Meet was a vibrant gathering that celebrated unity, collaboration, and fellowship between sister clubs. Designed to strengthen bonds, the meet highlighted shared values, collective growth, and the spirit of Rotaract. Members engaged in meaningful discussions, exchanged ideas, and explored opportunities for joint projects that would amplify impact across communities. The event fostered friendship and mutual respect, creating a platform where clubs could learn from one another and celebrate their partnership. With structured proceedings, open forum interactions, and heartfelt camaraderie, the Twin Club Meet concluded as a memorable milestone in building lasting connections and shared purpose.",
+    image: "https://i.ibb.co/rGxg6SD7/sc.jpg",
   },
   {
     title: "Joint Meeting Twin Club Agreement",
     date: "March 30, 2026",
     month: "March",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "7:00 PM to 8:00 PM ",
+    avenue: "ISD",
+    location: "Google Meet",
+    attendees: "15",
     status: "Past",
-    description: "Strengthening international ties through our Twin Club Agreement. A formal celebration of our partnership, dedicated to executing global service projects and fostering cross-cultural understanding.",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop",
+    description: "The Joint Sister Club Meet was a vibrant gathering that celebrated unity, collaboration, and fellowship among partner clubs. As one of the joint meets under the Sister Club Agreement, it was designed to strengthen bonds and highlight shared values, collective growth, and the spirit of Rotaract. Members engaged in meaningful discussions, exchanged ideas, and explored opportunities for joint projects to amplify impact across communities. The event fostered friendship and mutual respect, creating a platform where clubs could learn from one another and celebrate their partnership. With structured proceedings and heartfelt camaraderie, the meet concluded as a memorable milestone in lasting connections.",
+    image: "https://i.ibb.co/DHf0HhHh/tc.jpg",
   },
   {
     title: "Rotaract Professional Development League",
     date: "April 05, 2026",
     month: "April",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "10:30 AM to 5:00 PM",
+    avenue: "PDD",
+    location: "Seminar Hall , SCOP building, Vadgaon Bk, Pune",
+    attendees: "11",
     status: "Past",
-    description: "A multi-day professional development challenge where members competed in mock interviews, case studies, and corporate simulations to sharpen their corporate readiness and leadership skills.",
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1600&auto=format&fit=crop",
+    description: "The Rotaract Professional Development League (RPDL) – Hosted by RaC Pune Royal, and Co hosted by RaC Pune Warje and RaC SCOP was an engaging platform designed to sharpen skills and inspire growth among members. Structured as a league, it featured multiple competitive rounds including rapid fire, debate, extempore, and short quizzes, each testing knowledge, confidence, and communication. Participants showcased their ability to think critically, speak persuasively, and respond spontaneously, fostering both professional and personal development. The event encouraged healthy competition while promoting fellowship and learning. With its dynamic format and diverse challenges, RPDL emerged as a memorable initiative that empowered Rotaractors to enhance their capabilities and embrace the spirit of growth.",
+    image: "https://i.ibb.co/4RMjJ2KD/IMG-20260405-WA0147.jpg",
   },
   {
     title: "Spark Tank",
     date: "May 09, 2026",
     month: "May",
-    time: "TBD",
-    avenue: "NA",
-    location: "Pune",
-    attendees: "0",
+    time: "10:35 AM to 4:15 PM",
+    avenue: "PAO",
+    location: "Seminar Hall SCOP, Vadgaon bk, Pune",
+    attendees: "15",
     status: "Past",
-    description: "Inspired by popular pitching shows, Spark Tank gave members the platform to present their innovative startup ideas to a panel of judges, receiving critical feedback and entrepreneurial mentorship.",
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1600&auto=format&fit=crop",
+    description: "Spark Tank, organized by Rotaract Club of Sinhgad College of Pharmacy in collaboration with Rotary Club of Pune Nanded City and co host clubs RaC Pune Royal and RaC Pune Pristine Paradise, was a dynamic platform empowering 70+ beneficiaries including participants, students, Rotaractors, and volunteers. The event enabled aspiring entrepreneurs to pitch innovative ideas before an esteemed panel of professionals and industry leaders, receiving valuable mentorship, feedback, and motivation. Winners were honored with cash prizes, trophies, and certificates. Beyond entrepreneurship, Spark Tank fostered networking, sponsorship opportunities, and promoted a Go Green initiative, making it a successful and impactful milestone.",
+    image: "https://i.ibb.co/TqMMVtK3/20260509-154908-1.jpg",
   },
 ];
 
@@ -641,195 +641,202 @@ export const EVENTS_DATA = [
 // END OF EDITABLE SECTION
 // =====================================================
 
+const EventCard = React.memo(({ event, index, onClick }: { event: typeof EVENTS_DATA[0]; index: number; onClick: (event: typeof EVENTS_DATA[0]) => void }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-40px" }}
+    transition={{ duration: 0.4, delay: (index % 3) * 0.1, ease: "easeOut" as const }}
+    className="will-change-transform will-change-opacity"
+  >
+    <Card
+      className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group sm:hover:scale-105"
+      onClick={() => onClick(event)}
+    >
+      <div className="relative h-40 sm:h-48 overflow-hidden">
+        <img
+          src={event.image}
+          alt={event.title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 will-change-transform"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
+            <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span>{event.attendees}</span>
+          </div>
+          {event.avenue && event.avenue !== "NA" && (
+            <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
+              <Tag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="truncate max-w-[80px] sm:max-w-[100px]">{event.avenue}</span>
+            </div>
+          )}
+        </div>
+        <h3 className="text-base sm:text-xl font-semibold mb-2 sm:mb-3 line-clamp-2">{event.title}</h3>
+        <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 line-clamp-2">{event.description}</p>
+        <div className="space-y-1.5 sm:space-y-2">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span>{event.date}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span>{event.time}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="line-clamp-1">{event.location}</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
+));
+
 const Events = () => {
   const [selectedMonth, setSelectedMonth] = useState<string>("all");
   const [selectedAvenue, setSelectedAvenue] = useState<string>("all");
   const [selectedEvent, setSelectedEvent] = useState<typeof EVENTS_DATA[0] | null>(null);
 
-  // Get unique months in order
-  const monthOrder = ["July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June"];
-  const months = monthOrder.filter(month => EVENTS_DATA.some(event => event.month === month));
+  const handleEventClick = useCallback((event: typeof EVENTS_DATA[0]) => {
+    setSelectedEvent(event);
+  }, []);
 
-  // Get unique avenues
-  const allAvenues = Array.from(new Set(
-    EVENTS_DATA.flatMap(e => e.avenue.split(/[,&x]+/).map(a => a.trim()).filter(a => a && a !== "NA"))
-  )).sort();
+  const months = useMemo(() => {
+    const monthOrder = ["July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June"];
+    return monthOrder.filter(month => EVENTS_DATA.some(event => event.month === month));
+  }, []);
 
-  // Filter events
-  const filteredEvents = EVENTS_DATA.filter(event => {
-    const matchesMonth = selectedMonth === "all" || event.month === selectedMonth;
-    const matchesAvenue = selectedAvenue === "all" || event.avenue.includes(selectedAvenue);
-    return matchesMonth && matchesAvenue;
-  });
+  const allAvenues = useMemo(() => {
+    return Array.from(new Set(
+      EVENTS_DATA.flatMap(e => e.avenue.split(/[,&x]+/).map(a => a.trim()).filter(a => a && a !== "NA"))
+    )).sort();
+  }, []);
 
-  const EventCard = ({ event, index }: { event: typeof EVENTS_DATA[0]; index: number }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, delay: (index % 3) * 0.1, ease: "easeOut" as const }}
-      className="will-change-transform will-change-opacity"
-    >
-      <Card 
-        className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group sm:hover:scale-105"
-        onClick={() => setSelectedEvent(event)}
-      >
-        <div className="relative h-40 sm:h-48 overflow-hidden">
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 will-change-transform"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <CardContent className="p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
-              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>{event.attendees}</span>
-            </div>
-            {event.avenue && event.avenue !== "NA" && (
-              <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground">
-                <Tag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="truncate max-w-[80px] sm:max-w-[100px]">{event.avenue}</span>
-              </div>
-            )}
-          </div>
-          <h3 className="text-base sm:text-xl font-semibold mb-2 sm:mb-3 line-clamp-2">{event.title}</h3>
-          <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 line-clamp-2">{event.description}</p>
-          <div className="space-y-1.5 sm:space-y-2">
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              <span>{event.date}</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              <span>{event.time}</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              <span className="line-clamp-1">{event.location}</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
+  const filteredEvents = useMemo(() => {
+    return EVENTS_DATA.filter(event => {
+      const matchesMonth = selectedMonth === "all" || event.month === selectedMonth;
+      const matchesAvenue = selectedAvenue === "all" || event.avenue.includes(selectedAvenue);
+      return matchesMonth && matchesAvenue;
+    });
+  }, [selectedMonth, selectedAvenue]);
 
   return (
     <>
-    <div className="min-h-screen py-8 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" as const }}
-          className="text-center mb-10 sm:mb-16"
-        >
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6">Events</h1>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
+      <div className="min-h-screen py-8 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" as const }}
-            className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto"
+            transition={{ duration: 0.5, ease: "easeOut" as const }}
+            className="text-center mb-10 sm:mb-16"
           >
-            Discover our activities and achievements.
-          </motion.p>
-        </motion.div>
+            <h1 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6">Events</h1>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" as const }}
+              className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto"
+            >
+              Discover our activities and achievements.
+            </motion.p>
+          </motion.div>
 
-        {/* Filters */}
-        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
-          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-            <SelectTrigger className="w-full sm:w-[200px]">
-              <SelectValue placeholder="Filter by Month" />
-            </SelectTrigger>
-            <SelectContent className="bg-background z-50">
-              <SelectItem value="all">All Months</SelectItem>
-              {months.map(month => (
-                <SelectItem key={month} value={month}>{month}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {/* Filters */}
+          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+              <SelectTrigger className="w-full sm:w-[200px]">
+                <SelectValue placeholder="Filter by Month" />
+              </SelectTrigger>
+              <SelectContent className="bg-background z-50">
+                <SelectItem value="all">All Months</SelectItem>
+                {months.map(month => (
+                  <SelectItem key={month} value={month}>{month}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Select value={selectedAvenue} onValueChange={setSelectedAvenue}>
-            <SelectTrigger className="w-full sm:w-[200px]">
-              <SelectValue placeholder="Filter by Avenue" />
-            </SelectTrigger>
-            <SelectContent className="bg-background z-50">
-              <SelectItem value="all">All Avenues</SelectItem>
-              {allAvenues.map(avenue => (
-                <SelectItem key={avenue} value={avenue}>{avenue}</SelectItem>
+            <Select value={selectedAvenue} onValueChange={setSelectedAvenue}>
+              <SelectTrigger className="w-full sm:w-[200px]">
+                <SelectValue placeholder="Filter by Avenue" />
+              </SelectTrigger>
+              <SelectContent className="bg-background z-50">
+                <SelectItem value="all">All Avenues</SelectItem>
+                {allAvenues.map(avenue => (
+                  <SelectItem key={avenue} value={avenue}>{avenue}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {filteredEvents.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {filteredEvents.map((event, index) => (
+                <EventCard key={event.title + index} event={event} index={index} onClick={handleEventClick} />
               ))}
-            </SelectContent>
-          </Select>
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No events found for the selected filters.</p>
+            </div>
+          )}
         </div>
-
-        {filteredEvents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {filteredEvents.map((event, index) => (
-              <EventCard key={index} event={event} index={index} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No events found for the selected filters.</p>
-          </div>
-        )}
       </div>
-    </div>
 
-    {/* Event Details Dialog */}
-    <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto mx-2 sm:mx-auto">
-        {selectedEvent && (
-          <>
-            <div className="relative h-48 sm:h-80 -mx-6 -mt-6 mb-4 sm:mb-6 overflow-hidden">
-              <img 
-                src={selectedEvent.image} 
-                alt={selectedEvent.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                <DialogTitle className="text-xl sm:text-3xl font-bold text-foreground">{selectedEvent.title}</DialogTitle>
+      {/* Event Details Dialog */}
+      <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto mx-2 sm:mx-auto">
+          {selectedEvent && (
+            <>
+              <div className="relative h-48 sm:h-80 -mx-6 -mt-6 mb-4 sm:mb-6 overflow-hidden">
+                <img
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                  <DialogTitle className="text-xl sm:text-3xl font-bold text-foreground">{selectedEvent.title}</DialogTitle>
+                </div>
               </div>
-            </div>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-muted-foreground text-sm">
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                  <span className="font-medium">{selectedEvent.date}</span>
-                </div>
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                  <span className="font-medium">{selectedEvent.time}</span>
-                </div>
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                  <span className="font-medium">{selectedEvent.location}</span>
-                </div>
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <Users className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                  <span className="font-medium">{selectedEvent.attendees} Attendees</span>
-                </div>
-                {selectedEvent.avenue && selectedEvent.avenue !== "NA" && (
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-muted-foreground text-sm">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <Tag className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                    <span className="font-medium">Avenue: {selectedEvent.avenue}</span>
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="font-medium">{selectedEvent.date}</span>
                   </div>
-                )}
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="font-medium">{selectedEvent.time}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="font-medium">{selectedEvent.location}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Users className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="font-medium">{selectedEvent.attendees} Attendees</span>
+                  </div>
+                  {selectedEvent.avenue && selectedEvent.avenue !== "NA" && (
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Tag className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                      <span className="font-medium">Avenue: {selectedEvent.avenue}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="prose prose-sm sm:prose-lg max-w-none">
+                  <p className="text-foreground leading-relaxed text-sm sm:text-lg">
+                    {selectedEvent.description}
+                  </p>
+                </div>
               </div>
-              <div className="prose prose-sm sm:prose-lg max-w-none">
-                <p className="text-foreground leading-relaxed text-sm sm:text-lg">
-                  {selectedEvent.description}
-                </p>
-              </div>
-            </div>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

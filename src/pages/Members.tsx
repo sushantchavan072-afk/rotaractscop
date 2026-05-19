@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Instagram, Linkedin, X } from "lucide-react";
+import { Phone, Instagram, IdCard, X } from "lucide-react";
 
 interface MemberDetails {
   name: string;
@@ -11,43 +11,42 @@ interface MemberDetails {
   phone?: string;
   instagramUrl?: string;
   instaHandle?: string;
-  linkedinUrl?: string;
-  linkedinHandle?: string;
+  rotaryId?: string | number;
 }
 
 const allMembers: MemberDetails[] = [
-  { name: "Rtr. Pragama Magotra", position: "President", image: "https://i.ibb.co/3yp77QmS/Pragama.png", category: "core" },
+  { name: "Rtr. Pragama Magotra", position: "President", image: "https://i.ibb.co/3yp77QmS/Pragama.png", category: "core", phone: "8888590902", instaHandle: "pragama_12", instagramUrl: "https://instagram.com/pragama_12", rotaryId: "11996355" },
   { name: "Rtr. Prerna Bhilare", position: "Secretary", image: "https://i.ibb.co/9m1Zxg8q/Prerna.png", category: "core" },
-  { name: "Rtr. Pradnya Gaikar", position: "Vice President", image: "https://i.ibb.co/s921stS8/installation.png", category: "core" },
+  { name: "Rtr. Pradnya Gaikar", position: "Vice President", image: "https://i.ibb.co/s921stS8/installation.png", category: "core", phone: "9119584960", instaHandle: "_pradnyagaikar_", instagramUrl: "https://instagram.com/_pradnyagaikar_", rotaryId: "11997120" },
   { name: "Rtr. Arya Londhe", position: "Treasurer", image: "https://i.ibb.co/mrsKcX0H/1772863960494-1.png", category: "core" },
   { name: "Rtr. Vaishnavi Kharat", position: "IPP & Club Advisor", image: "https://i.ibb.co/cXFwjVZk/Whats-App-Image-2026-03-04-at-17-26-57.jpg", category: "core" },
-  { name: "Rtr. Urvashi Chaudhari", position: "Sergeant-At-Arms", image: "https://i.ibb.co/6786pnT1/urvashi.png", category: "bod" },
-  { name: "Rtr. Shubhangi Kumawat", position: "Club Service Director", image: "https://i.ibb.co/0jZLSFHg/Shubhangi.png", category: "bod" },
+  { name: "Rtr. Urvashi Chaudhari", position: "Sergeant-At-Arms", image: "https://i.ibb.co/6786pnT1/urvashi.png", category: "bod", phone: "7499279511", rotaryId: "12376960" },
+  { name: "Rtr. Shubhangi Kumawat", position: "Club Service Director", image: "https://i.ibb.co/0jZLSFHg/Shubhangi.png", category: "bod", phone: "8484939498", instaHandle: "Kumawat_Shubhangi", instagramUrl: "https://instagram.com/Kumawat_Shubhangi", rotaryId: "12345839" },
   { name: "Rtr. Prayag Pokale", position: "MDD", image: "https://i.ibb.co/fz2SWbfG/Prayag.jpg", category: "bod" },
   { name: "Rtr. Mrunal Potharkar", position: "CMD & Finance Director", image: "https://i.ibb.co/Q7JdkX4C/7b421d70-1bbf-11f1-aa9e-114d2a34bfc6.jpg", category: "bod" },
   { name: "Rtr. Vedanti Khardikar", position: "PDD", image: "https://i.ibb.co/tMJY7GLn/Vedanti.png", category: "bod" },
-  { name: "Rtr. Arya Chavan", position: "PAO", image: "https://i.ibb.co/4ZjV3kN4/Arya-chavan.png", category: "bod" },
-  { name: "Rtr. Amruta Potdukhe", position: "International Service Director", image: "https://i.ibb.co/VW3dDLh1/Amruta.jpg", category: "bod" },
-  { name: "Rtr. Sushant Chavan", position: "PRO + Editor", image: "https://i.ibb.co/NnQbWxF1/Sushant.jpg", category: "bod" },
-  { name: "Rtr. Chaitanya Jadhav", position: "Jt. PRO", image: "https://i.ibb.co/KdtFdkf/Chaitanya.png", category: "bod" },
+  { name: "Rtr. Arya Chavan", position: "PAO", image: "https://i.ibb.co/4ZjV3kN4/Arya-chavan.png", category: "bod", phone: "9881628468", instaHandle: "aryachavan1402", instagramUrl: "https://instagram.com/aryachavan1402", rotaryId: "12367548" },
+  { name: "Rtr. Amruta Potdukhe", position: "International Service Director", image: "https://i.ibb.co/VW3dDLh1/Amruta.jpg", category: "bod", phone: "8856835779", instaHandle: "01amrutap_", instagramUrl: "https://instagram.com/01amrutap_", rotaryId: "12366808" },
+  { name: "Rtr. Sushant Chavan", position: "PRO + Editor", image: "https://i.ibb.co/NnQbWxF1/Sushant.jpg", category: "bod", phone: "9529936483", instaHandle: "sushanttchavan", instagramUrl: "https://instagram.com/sushanttchavan", rotaryId: "12374782" },
+  { name: "Rtr. Chaitanya Jadhav", position: "Jt. PRO", image: "https://i.ibb.co/KdtFdkf/Chaitanya.png", category: "bod", phone: "9860183801", instaHandle: "justttt.cj", instagramUrl: "https://instagram.com/justttt.cj", rotaryId: "12366677" },
   { name: "Rtr. Dhanashri Choudhari", position: "Public Image Officer", image: "https://i.ibb.co/LVDCy26/installation.png", category: "bod" },
   { name: "Rtr. Anushka Chaudhary", position: "Jt. PID", image: "https://i.ibb.co/q3gHzBTp/Anushka.png", category: "bod" },
-  { name: "Rtr. Bhumi Sharma", position: "Sports Director", image: "https://i.ibb.co/MDxHc4jw/Bhumi.png", category: "bod" },
+  { name: "Rtr. Bhumi Sharma", position: "Sports Director", image: "https://i.ibb.co/MDxHc4jw/Bhumi.png", category: "bod", phone: "9689361858", instaHandle: "_bhumisharma28_", instagramUrl: "https://instagram.com/_bhumisharma28_", rotaryId: "12374713" },
   { name: "Rtr. Aditi Gandhi", position: "RRRO & IRRO", image: "https://i.ibb.co/4RYmWnK2/Aditi-gandhi.png", category: "bod" },
   { name: "Rtr. Jagruti Dave", position: "DEI Representative", image: "https://i.ibb.co/MDLYdBwd/Jagruti.png", category: "bod" },
-  { name: "Rtr. Palak Kumari", position: "WRWC", image: "https://i.ibb.co/60t3Jp1J/palak.jpg", category: "bod" },
-  { name: "Rtr. Chaitrali Dave", position: "General Body Member", image: "https://i.ibb.co/v6GPxzSp/Gemini-Generated-Image-hkwumihkwumihkwu.png", category: "general" },
-  { name: "Rtr. Pranjal Mate", position: "General Body Member", image: "https://i.ibb.co/cc8s1Fbk/Screenshot-20250705-160930-Pranjal-Mate.jpg", category: "general" },
+  { name: "Rtr. Palak Kumari", position: "WRWC", image: "https://i.ibb.co/60t3Jp1J/palak.jpg", category: "bod", phone: "9307101903", instaHandle: "heyypalakk", instagramUrl: "https://instagram.com/heyypalakk", rotaryId: "12366676" },
+  { name: "Rtr. Chaitrali Dave", position: "General Body Member", image: "https://i.ibb.co/v6GPxzSp/Gemini-Generated-Image-hkwumihkwumihkwu.png", category: "general", phone: "8459398003", instaHandle: "dave_chaitraliii", instagramUrl: "https://instagram.com/dave_chaitraliii", rotaryId: "12380216" },
+  { name: "Rtr. Pranjal Mate", position: "General Body Member", image: "https://i.ibb.co/cc8s1Fbk/Screenshot-20250705-160930-Pranjal-Mate.jpg", category: "general", phone: "8830598285", instaHandle: "praanjaal", instagramUrl: "https://instagram.com/praanjaal", rotaryId: "12380398" },
   { name: "Rtr. Anjali Jagdale", position: "General Body Member", image: "https://i.ibb.co/yn43TRDh/Gemini-Generated-Image-c3yjzwc3yjzwc3yj.png", category: "general" },
   { name: "Rtr. Amit Bhosale", position: "General Body Member", image: "https://i.ibb.co/VWqw12TQ/Gemini-Generated-Image-j4amvj4amvj4amvj.png", category: "general" },
-  { name: "Rtr. Yogiraj Apsingekar", position: "General Body Member", image: "https://i.ibb.co/sdVM3VZB/Picsart-25-08-28-18-09-50-014-Yogiraj-Apsingekar.jpg", category: "general" },
+  { name: "Rtr. Yogiraj Apsingekar", position: "General Body Member", image: "https://i.ibb.co/sdVM3VZB/Picsart-25-08-28-18-09-50-014-Yogiraj-Apsingekar.jpg", category: "general", phone: "7058448085", instaHandle: "Yogiraj_45_", instagramUrl: "https://instagram.com/Yogiraj_45_", rotaryId: "12434377" },
   { name: "Rtr. Milind Singh Rajput", position: "General Body Member", image: "https://i.ibb.co/FqCbCVPR/Gemini-Generated-Image-tc9m32tc9m32tc9m.png", category: "general" },
-  { name: "Rtr. Priya Hangarge", position: "General Body Member", image: "https://i.ibb.co/7xkpsFGF/Gemini-Generated-Image-tle599tle599tle5.png", category: "general" },
+  { name: "Rtr. Priya Hangarge", position: "General Body Member", image: "https://i.ibb.co/7xkpsFGF/Gemini-Generated-Image-tle599tle599tle5.png", category: "general", phone: "8766699778", instaHandle: "priyaaa_1826", instagramUrl: "https://instagram.com/priyaaa_1826" },
   { name: "Rtr. Adnya Jadhav", position: "General Body Member", image: "https://i.ibb.co/wtV3h7V/f0437adb-3839-48de-8d96-08cfa85357c7.jpg", category: "general" },
-  { name: "Rtr. Utkarsh Garde", position: "General Body Member", image: "https://i.ibb.co/qY0YCM4k/IMG-20250828-115734-Utkarsh-Garde.jpg", category: "general" },
+  { name: "Rtr. Utkarsh Garde", position: "General Body Member", image: "https://i.ibb.co/qY0YCM4k/IMG-20250828-115734-Utkarsh-Garde.jpg", category: "general", phone: "9399230076", instaHandle: "_utkarsh.16", instagramUrl: "https://instagram.com/_utkarsh.16", rotaryId: "12434622" },
   { name: "Rtr. Prerna Gade", position: "General Body Member", image: "https://i.ibb.co/BV3R09VP/SAVE-20250828-110804-Prerana-Gade.jpg", category: "general" },
-  { name: "Rtr. Revati Kulal", position: "General Body Member", image: "https://i.ibb.co/1YjRvf01/Gemini-Generated-Image-qxviejqxviejqxvi.png", category: "general" },
-  { name: "Rtr. Prathamesh", position: "General Body Member", image: "https://i.ibb.co/846yM3Gd/IMG-1101-pratham-dhatrak.jpg", category: "general" },
+  { name: "Rtr. Revati Kulal", position: "General Body Member", image: "https://i.ibb.co/1YjRvf01/Gemini-Generated-Image-qxviejqxviejqxvi.png", category: "general", phone: "8484972156", instaHandle: "revati2610", instagramUrl: "https://instagram.com/revati2610", rotaryId: "12415053" },
+  { name: "Rtr. Prathamesh", position: "General Body Member", image: "https://i.ibb.co/846yM3Gd/IMG-1101-pratham-dhatrak.jpg", category: "general", phone: "9356947567", instaHandle: "Prathammm.18", instagramUrl: "https://instagram.com/Prathammm.18", rotaryId: "12434707" },
 ];
 
 const sections: { key: "core" | "bod" | "general"; title: string; subtitle: string }[] = [
@@ -63,7 +62,7 @@ const filterOptions = [
   { key: "general", label: "GBM" },
 ];
 
-const MemberCard = ({ member, index }: { member: MemberDetails, index: number }) => {
+const MemberCard = React.memo(({ member, index }: { member: MemberDetails, index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -115,20 +114,29 @@ const MemberCard = ({ member, index }: { member: MemberDetails, index: number })
                <Instagram className="w-3 h-3 shrink-0" />
                <span className="truncate">{member.instaHandle || "Not Provided"}</span>
              </a>
-             <a href={member.linkedinUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-1.5 rounded-full transition-colors w-full">
-               <Linkedin className="w-3 h-3 shrink-0" />
-               <span className="truncate">{member.linkedinHandle || "Not Provided"}</span>
-             </a>
+             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-black/5 dark:bg-white/5 px-3 py-1.5 rounded-full w-full">
+               <IdCard className="w-3 h-3 shrink-0" />
+               <span className="truncate">{member.rotaryId || "Not Provided"}</span>
+             </div>
           </div>
         </div>
       </motion.div>
     </motion.div>
   );
-};
+});
 
 const Members = () => {
   const [filter, setFilter] = useState("all");
-  const visible = filter === "all" ? sections : sections.filter((s) => s.key === filter);
+  const visible = useMemo(() => {
+    return filter === "all" ? sections : sections.filter((s) => s.key === filter);
+  }, [filter]);
+
+  const categorizedMembers = useMemo(() => {
+    return sections.reduce((acc, section) => {
+      acc[section.key] = allMembers.filter(m => m.category === section.key);
+      return acc;
+    }, {} as Record<string, MemberDetails[]>);
+  }, []);
 
   return (
     <div className="min-h-screen py-16">
@@ -179,7 +187,7 @@ const Members = () => {
         {/* Sections */}
         <AnimatePresence mode="wait">
           {visible.map((section, sIdx) => {
-            const members = allMembers.filter((m) => m.category === section.key);
+            const members = categorizedMembers[section.key] || [];
             return (
               <motion.section
                 key={section.key}

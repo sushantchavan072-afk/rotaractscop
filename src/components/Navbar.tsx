@@ -22,7 +22,16 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -38,11 +47,10 @@ const Navbar = () => {
     >
       <div className="relative w-full max-w-7xl mx-auto flex justify-center pointer-events-auto">
         <nav
-          className={`transition-all duration-500 flex items-center w-full lg:w-auto ${
-            scrolled 
-              ? "glass-pill px-3 py-2 shadow-xl" 
+          className={`transition-all duration-500 flex items-center w-full lg:w-auto ${scrolled
+              ? "glass-pill px-3 py-2 shadow-xl"
               : "bg-background/40 backdrop-blur-xl px-2 py-2 rounded-full border border-border/40 shadow-sm"
-          }`}
+            }`}
         >
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">
@@ -50,13 +58,11 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-5 py-2.5 text-[15px] transition-colors duration-300 rounded-full ${
-                  i === navLinks.length ? "font-bold text-primary ml-2 bg-primary/10 hover:bg-primary/20" : "font-medium"
-                } ${
-                  isActive(link.path) && i !== navLinks.length
+                className={`relative px-5 py-2.5 text-[15px] transition-colors duration-300 rounded-full ${i === navLinks.length ? "font-bold text-primary ml-2 bg-primary/10 hover:bg-primary/20" : "font-medium"
+                  } ${isActive(link.path) && i !== navLinks.length
                     ? "text-primary"
                     : i !== navLinks.length ? "text-foreground/70 hover:text-foreground" : ""
-                }`}
+                  }`}
               >
                 <span className="relative z-10">{link.label}</span>
                 {isActive(link.path) && i !== navLinks.length && (
@@ -68,7 +74,7 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
-            
+
             {/* Theme Toggle Desktop */}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -99,7 +105,7 @@ const Navbar = () => {
             <Link to="/">
               <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
             </Link>
-            
+
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -123,7 +129,7 @@ const Navbar = () => {
                   <Moon className="w-5 h-5" />
                 </motion.div>
               </button>
-              
+
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center hover:bg-foreground/10 transition-colors z-50 relative"
@@ -153,15 +159,14 @@ const Navbar = () => {
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`relative flex items-center px-5 py-3.5 rounded-full text-[15px] font-bold transition-all overflow-hidden group ${
-                      active ? "text-primary-foreground" : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
-                    } ${link.path === "/login" && !active ? "text-primary mt-2 bg-primary/5" : ""}`}
+                    className={`relative flex items-center px-5 py-3.5 rounded-full text-[15px] font-bold transition-all overflow-hidden group ${active ? "text-primary-foreground" : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
+                      } ${link.path === "/login" && !active ? "text-primary mt-2 bg-primary/5" : ""}`}
                   >
                     <span className="relative z-10 flex items-center gap-4">
                       <Icon className={`w-[18px] h-[18px] transition-colors ${active ? "text-primary-foreground" : "text-primary/60 group-hover:text-primary"}`} />
                       {link.label}
                     </span>
-                    
+
                     {/* Animated Spring Pill Background */}
                     {active && (
                       <motion.div

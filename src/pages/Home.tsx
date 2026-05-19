@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarWidget } from "@/components/ui/calendar";
@@ -6,12 +6,12 @@ import { ArrowRight, Users, Award, Heart, Globe, Calendar, ArrowUpRight, MapPin,
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { EVENTS_DATA } from "./Events";
 import { format } from "date-fns";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import logo from "@/assets/logo.png";
 
-const springTransition = { type: "spring", stiffness: 350, damping: 30 };
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
-const item = {
+const springTransition = { type: "spring" as const, stiffness: 350, damping: 30 };
+const stagger: Variants = { visible: { transition: { staggerChildren: 0.1 } } };
+const item: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: springTransition },
 };
@@ -36,36 +36,104 @@ const marqueeImages = [
   "https://i.ibb.co/4Zv02bZ6/RESCUE-RHYTHMS.jpg",
 ];
 
+const BentoGrid = React.memo(() => (
+  <motion.div 
+    className="lg:col-span-7 grid grid-cols-2 gap-4"
+    variants={stagger}
+    initial="hidden"
+    animate="visible"
+  >
+    {/* Bento Box 1: Avenues */}
+    <motion.div variants={item} className="col-span-2 sm:col-span-1 glass-panel p-6 bg-white/70 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-colors group">
+      <Link to="/avenue" className="absolute inset-0 z-10" aria-label="View Avenues" />
+      <div className="flex justify-between items-start mb-8 relative z-0">
+        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+          <Heart className="w-5 h-5 text-primary" />
+        </div>
+        <ArrowUpRight className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+      </div>
+      <div className="relative z-0">
+        <p className="text-3xl font-extrabold text-foreground mb-1">4 Avenues</p>
+        <p className="text-sm font-medium text-muted-foreground">Discover Our Core Focus</p>
+      </div>
+    </motion.div>
+
+    {/* Bento Box 2: Next Event */}
+    <motion.div variants={item} className="col-span-2 sm:col-span-1 glass-panel p-6 bg-primary text-white hover:shadow-lg hover:shadow-primary/30 transition-all group relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+      <Link to="/events" className="absolute inset-0 z-10" aria-label="View Events" />
+      <div className="flex justify-between items-start mb-8 relative z-0">
+        <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+          <Calendar className="w-5 h-5 text-white" />
+        </div>
+        <ArrowUpRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+      </div>
+      <div className="relative z-0">
+        <p className="text-sm font-semibold text-white/80 uppercase tracking-widest mb-1">Upcoming</p>
+        <p className="text-xl font-bold leading-tight">Discover Our Next Impactful Event</p>
+      </div>
+    </motion.div>
+
+    {/* Bento Box 3: Club Info Grid */}
+    <motion.div variants={item} className="col-span-2 glass-panel p-6 bg-white/60 dark:bg-white/5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Club Information</h3>
+        <Link to="/about" className="text-xs font-bold text-primary hover:underline flex items-center">
+          Learn More <ArrowRight className="w-3 h-3 ml-1" />
+        </Link>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {clubInfo.map((info) => (
+          <motion.div 
+            key={info.label}
+            whileHover={{ scale: 1.05, y: -4 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white dark:bg-card shadow-sm border border-black/5 dark:border-white/5 text-center transition-all cursor-pointer group hover:shadow-md"
+          >
+            <div className={`w-8 h-8 rounded-full ${info.bg} flex items-center justify-center mb-2 group-hover:scale-125 group-hover:shadow-sm transition-all duration-300`}>
+              <info.icon className={`w-4 h-4 ${info.color} group-hover:rotate-12 transition-transform duration-300`} />
+            </div>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5 group-hover:text-primary transition-colors">{info.label}</span>
+            <span className="text-[11px] font-extrabold text-foreground leading-tight">{info.value}</span>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  </motion.div>
+));
+
 const Home = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedEvents, setSelectedEvents] = useState<typeof EVENTS_DATA>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const eventDates = EVENTS_DATA.flatMap(event => {
-    const dates: Date[] = [];
-    const eventDateStr = event.date;
-    if (eventDateStr.includes("-")) {
-      try {
-        const parts = eventDateStr.replace(",", "").split(" ");
-        if(parts.length >= 3) {
-          const monthStr = parts[0];
-          const daysStr = parts[1];
-          const yearStr = parts[2];
-          const [startDay, endDay] = daysStr.split("-").map(Number);
-          for (let d = startDay; d <= endDay; d++) {
-            dates.push(new Date(`${monthStr} ${d}, ${yearStr}`));
+  const eventDates = useMemo(() => {
+    return EVENTS_DATA.flatMap(event => {
+      const dates: Date[] = [];
+      const eventDateStr = event.date;
+      if (eventDateStr.includes("-")) {
+        try {
+          const parts = eventDateStr.replace(",", "").split(" ");
+          if(parts.length >= 3) {
+            const monthStr = parts[0];
+            const daysStr = parts[1];
+            const yearStr = parts[2];
+            const [startDay, endDay] = daysStr.split("-").map(Number);
+            for (let d = startDay; d <= endDay; d++) {
+              dates.push(new Date(`${monthStr} ${d}, ${yearStr}`));
+            }
           }
+        } catch (e) {
+          // ignore
         }
-      } catch (e) {
-        // ignore
+      } else {
+        dates.push(new Date(eventDateStr));
       }
-    } else {
-      dates.push(new Date(eventDateStr));
-    }
-    return dates;
-  });
+      return dates;
+    });
+  }, []);
 
-  const handleDateSelect = (selectedDate: Date | undefined) => {
+  const handleDateSelect = useCallback((selectedDate: Date | undefined) => {
     setDate(selectedDate);
     if (!selectedDate) return;
 
@@ -100,7 +168,7 @@ const Home = () => {
       setSelectedEvents(eventsOnDate);
       setIsDialogOpen(true);
     }
-  };
+  }, []);
 
   return (
     <div className="w-full">
@@ -155,69 +223,7 @@ const Home = () => {
           </motion.div>
 
           {/* Right Column: Interactive Bento Grid */}
-          <motion.div 
-            className="lg:col-span-7 grid grid-cols-2 gap-4"
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-          >
-            {/* Bento Box 1: Avenues */}
-            <motion.div variants={item} className="col-span-2 sm:col-span-1 glass-panel p-6 bg-white/70 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-colors group">
-              <Link to="/avenue" className="absolute inset-0 z-10" aria-label="View Avenues" />
-              <div className="flex justify-between items-start mb-8 relative z-0">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-primary" />
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-              </div>
-              <div className="relative z-0">
-                <p className="text-3xl font-extrabold text-foreground mb-1">4 Avenues</p>
-                <p className="text-sm font-medium text-muted-foreground">Discover Our Core Focus</p>
-              </div>
-            </motion.div>
-
-            {/* Bento Box 2: Next Event */}
-            <motion.div variants={item} className="col-span-2 sm:col-span-1 glass-panel p-6 bg-primary text-white hover:shadow-lg hover:shadow-primary/30 transition-all group relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-              <Link to="/events" className="absolute inset-0 z-10" aria-label="View Events" />
-              <div className="flex justify-between items-start mb-8 relative z-0">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-white" />
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-              </div>
-              <div className="relative z-0">
-                <p className="text-sm font-semibold text-white/80 uppercase tracking-widest mb-1">Upcoming</p>
-                <p className="text-xl font-bold leading-tight">Discover Our Next Impactful Event</p>
-              </div>
-            </motion.div>
-
-            {/* Bento Box 3: Club Info Grid */}
-            <motion.div variants={item} className="col-span-2 glass-panel p-6 bg-white/60 dark:bg-white/5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Club Information</h3>
-                <Link to="/about" className="text-xs font-bold text-primary hover:underline flex items-center">
-                  Learn More <ArrowRight className="w-3 h-3 ml-1" />
-                </Link>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {clubInfo.map((info) => (
-                  <motion.div 
-                    key={info.label}
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white dark:bg-card shadow-sm border border-black/5 dark:border-white/5 text-center transition-all cursor-pointer group hover:shadow-md"
-                  >
-                    <div className={`w-8 h-8 rounded-full ${info.bg} flex items-center justify-center mb-2 group-hover:scale-125 group-hover:shadow-sm transition-all duration-300`}>
-                      <info.icon className={`w-4 h-4 ${info.color} group-hover:rotate-12 transition-transform duration-300`} />
-                    </div>
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5 group-hover:text-primary transition-colors">{info.label}</span>
-                    <span className="text-[11px] font-extrabold text-foreground leading-tight">{info.value}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+          <BentoGrid />
 
         </div>
       </section>
@@ -229,9 +235,7 @@ const Home = () => {
           <p className="text-3xl font-extrabold text-foreground">Relive Our Best Memories</p>
         </div>
 
-        {/* Fading Edges for Marquee */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#f7f9fb] dark:from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#f7f9fb] dark:from-background to-transparent z-10 pointer-events-none" />
+
 
         <div className="flex gap-4 w-max animate-scroll-x hover:[animation-play-state:paused] px-4">
           {/* We duplicate the images to create a seamless infinite scroll effect */}
@@ -330,7 +334,7 @@ const Home = () => {
           </div>
 
           {/* Right Side: Website Text */}
-          <div className="space-y-6 text-center md:text-left relative z-10">
+          <div className="space-y-4 text-center md:text-left relative z-10">
             <div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-4">Stay Connected</h3>
               <div className="w-full max-w-md h-1.5 bg-gradient-to-r from-primary to-rose-400 rounded-full mx-auto md:mx-0 shadow-sm shadow-primary/20"></div>
@@ -338,7 +342,7 @@ const Home = () => {
             <p className="text-muted-foreground leading-relaxed text-lg max-w-md mx-auto md:mx-0">
               Explore our calendar to stay updated with all upcoming events, meetings, and fellowship opportunities. We believe in taking action, having fun, and making a difference in our community and the world. Check back regularly so you don't miss out on what we're doing next!
             </p>
-            <div className="flex justify-center md:justify-start pt-2">
+            <div className="flex justify-center md:justify-start pt-4">
               <Link to="/events">
                 <Button className="rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-1 h-14 px-8 text-base">
                   View All Events <ArrowRight className="w-5 h-5 ml-2" />
