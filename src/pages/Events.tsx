@@ -668,6 +668,7 @@ const Events = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay: (index % 3) * 0.1, ease: "easeOut" as const }}
+      className="will-change-transform will-change-opacity"
     >
       <Card 
         className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group sm:hover:scale-105"
@@ -677,7 +678,9 @@ const Events = () => {
           <img
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 will-change-transform"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <CardContent className="p-4 sm:p-6">

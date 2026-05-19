@@ -113,6 +113,7 @@
     /* Base size increase to counter the 125% zoom habit. 
        Making 1rem = 18px instead of 16px */
     font-size: 18px; 
+    overflow-x: hidden;
   }
 
   body {
@@ -120,6 +121,7 @@
     font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -185,6 +187,8 @@
     box-shadow: var(--glass-shadow), var(--glass-inner);
     overflow: hidden;
     transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    transform: translateZ(0);
+    will-change: transform, background, border-color, box-shadow;
   }
 
   /* ── Panel surface (large radius) ── */
@@ -198,6 +202,8 @@
     box-shadow: var(--glass-shadow), var(--glass-inner);
     overflow: hidden;
     transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    transform: translateZ(0);
+    will-change: transform, background, border-color, box-shadow;
   }
 
   .glass-strong {
@@ -225,6 +231,7 @@
   .hover-spring {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
                 box-shadow 0.4s ease;
+    will-change: transform, box-shadow;
   }
   .hover-spring:hover {
     transform: translateY(-4px) scale(1.02);
@@ -239,14 +246,16 @@
     pointer-events: none;
     z-index: 0;
     animation: pulse-soft 8s ease-in-out infinite;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
   /* ── Utility animations ── */
-  .animate-slide-up   { animation: slide-up-spring 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
-  .animate-scale-in   { animation: scale-in-spring 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
-  .animate-float      { animation: float-y 6s ease-in-out infinite; }
-  .animate-scroll-x   { animation: scroll-x 40s linear infinite; }
-  .animate-liquid     { animation: liquid-morph 8s ease-in-out infinite; }
+  .animate-slide-up   { animation: slide-up-spring 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; will-change: transform, opacity; }
+  .animate-scale-in   { animation: scale-in-spring 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; will-change: transform, opacity; }
+  .animate-float      { animation: float-y 6s ease-in-out infinite; will-change: transform; transform: translateZ(0); }
+  .animate-scroll-x   { animation: scroll-x 40s linear infinite; will-change: transform; transform: translateZ(0); }
+  .animate-liquid     { animation: liquid-morph 8s ease-in-out infinite; will-change: border-radius, transform; transform: translateZ(0); }
 }
 
 /* ═══════════════════════════════════════════════

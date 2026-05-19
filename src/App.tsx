@@ -6,19 +6,22 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import { useEffect } from "react";
+import { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PageTransition from "./components/PageTransition";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Events from "./pages/Events";
-import Members from "./pages/Members";
-import Avenue from "./pages/Avenue";
-import Info from "./pages/Info";
-import Join from "./pages/Join";
-import BODApplication from "./pages/BODApplication";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
+
+// Lazy load pages for performance optimization
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Events = lazy(() => import("./pages/Events"));
+const Members = lazy(() => import("./pages/Members"));
+const Avenue = lazy(() => import("./pages/Avenue"));
+const Info = lazy(() => import("./pages/Info"));
+const Join = lazy(() => import("./pages/Join"));
+const BODApplication = lazy(() => import("./pages/BODApplication"));
+const Login = lazy(() => import("./pages/Login"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 import { ThemeProvider } from "./components/theme-provider";
 
@@ -33,18 +36,24 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
-        <Route path="/members" element={<PageTransition><Members /></PageTransition>} />
-        <Route path="/avenue" element={<PageTransition><Avenue /></PageTransition>} />
-        <Route path="/info" element={<PageTransition><Info /></PageTransition>} />
-        <Route path="/join" element={<PageTransition><Join /></PageTransition>} />
-        <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
-        <Route path="/bod-application" element={<PageTransition><BODApplication /></PageTransition>} />
-        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-      </Routes>
+      <Suspense fallback={
+        <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+          <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+        </div>
+      }>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
+          <Route path="/members" element={<PageTransition><Members /></PageTransition>} />
+          <Route path="/avenue" element={<PageTransition><Avenue /></PageTransition>} />
+          <Route path="/info" element={<PageTransition><Info /></PageTransition>} />
+          <Route path="/join" element={<PageTransition><Join /></PageTransition>} />
+          <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+          <Route path="/bod-application" element={<PageTransition><BODApplication /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

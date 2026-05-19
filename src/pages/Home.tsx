@@ -243,7 +243,9 @@ const Home = () => {
               <img 
                 src={`${imgSrc}&w=800&auto=format&fit=crop`} 
                 alt={`Event ${idx}`}
-                className="w-full h-full object-cover rounded-[1.25rem] hover:scale-110 transition-transform duration-500 cursor-pointer"
+                className="w-full h-full object-cover rounded-[1.25rem] hover:scale-110 transition-transform duration-500 cursor-pointer will-change-transform"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}
@@ -283,41 +285,41 @@ const Home = () => {
       <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mb-16 flex justify-center">
         
         {/* Animated Liquid Orbs behind */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/30 dark:bg-primary/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0" style={{ animationDelay: '0s' }}></div>
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-500/30 dark:bg-blue-500/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0" style={{ animationDelay: '-2s', animationDuration: '10s' }}></div>
-        <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-purple-500/30 dark:bg-purple-500/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0" style={{ animationDelay: '-4s', animationDuration: '12s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/30 dark:bg-primary/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0 transform-gpu will-change-transform" style={{ animationDelay: '0s' }}></div>
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-blue-500/30 dark:bg-blue-500/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0 transform-gpu will-change-transform" style={{ animationDelay: '-2s', animationDuration: '10s' }}></div>
+        <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-purple-500/30 dark:bg-purple-500/20 mix-blend-multiply dark:mix-blend-screen filter blur-[60px] animate-liquid pointer-events-none z-0 transform-gpu will-change-transform" style={{ animationDelay: '-4s', animationDuration: '12s' }}></div>
 
         {/* Pill Shaped Container */}
-        <div className="relative z-10 w-full max-w-5xl grid md:grid-cols-2 gap-8 lg:gap-12 items-center glass-panel p-8 sm:p-12 md:px-16 md:rounded-[4rem] border border-white/20 dark:border-white/10 shadow-2xl overflow-hidden hover-spring">
+        <div className="relative z-10 w-full max-w-5xl grid md:grid-cols-2 gap-8 lg:gap-12 items-center glass-panel p-4 sm:p-8 md:p-12 md:px-16 md:rounded-[4rem] border border-white/20 dark:border-white/10 shadow-2xl overflow-hidden hover-spring">
           
           {/* Inner specular liquid shine */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/5 dark:from-white/10 dark:to-transparent opacity-60 pointer-events-none"></div>
 
           {/* Left Side: Calendar */}
-          <div className="flex justify-center md:justify-end relative z-10">
-            <div className="bg-[#f2f4f8] dark:bg-zinc-900 p-6 inline-block rounded-[1.5rem] shadow-[10px_10px_30px_rgba(0,0,0,0.05),-10px_-10px_30px_rgba(255,255,255,0.8)] dark:shadow-2xl border border-white/50 dark:border-white/5 transition-all duration-500 hover:scale-[1.02]">
+          <div className="flex justify-center md:justify-end relative z-10 w-full overflow-hidden sm:overflow-visible">
+            <div className="bg-[#f2f4f8] dark:bg-zinc-900 p-3 sm:p-6 w-full sm:w-auto inline-block rounded-[1.5rem] shadow-[10px_10px_30px_rgba(0,0,0,0.05),-10px_-10px_30px_rgba(255,255,255,0.8)] dark:shadow-2xl border border-white/50 dark:border-white/5 transition-all duration-500 hover:scale-[1.02] max-w-md mx-auto md:max-w-none">
               <CalendarWidget
                 mode="single"
                 selected={date}
                 onSelect={handleDateSelect}
                 modifiers={{ hasEvent: eventDates }}
                 modifiersClassNames={{ hasEvent: "text-primary font-extrabold drop-shadow-[0_1.5px_1.5px_rgba(217,27,92,0.5)]" }}
-                className="p-2 bg-transparent"
+                className="p-1 sm:p-2 bg-transparent"
                 classNames={{
                   months: "w-full",
                   month: "space-y-4 w-full",
-                  caption: "flex justify-between items-center pb-4 mb-4 border-b border-black/10 dark:border-white/10 transition-colors duration-500",
-                  caption_label: "text-2xl font-bold tracking-tight text-foreground ml-2 transition-colors duration-500",
+                  caption: "flex w-full justify-between items-center pb-4 mb-4 border-b border-black/10 dark:border-white/10 transition-colors duration-500",
+                  caption_label: "text-xl sm:text-2xl font-bold tracking-tight text-foreground ml-1 sm:ml-2 transition-colors duration-500",
                   nav: "flex space-x-2",
-                  nav_button: "h-8 w-8 bg-primary hover:bg-primary/90 rounded-md flex items-center justify-center transition-all duration-500 text-primary-foreground shadow-sm shadow-primary/20",
+                  nav_button: "h-8 w-8 sm:h-8 sm:w-8 bg-primary hover:bg-primary/90 rounded-md flex items-center justify-center transition-all duration-500 text-primary-foreground shadow-sm shadow-primary/20",
                   nav_button_previous: "relative",
                   nav_button_next: "relative",
                   table: "w-full border-collapse space-y-2",
-                  head_row: "flex w-full justify-between mb-4",
-                  head_cell: "text-foreground w-10 font-bold text-lg text-center transition-colors duration-500",
+                  head_row: "flex w-full justify-between mb-2 sm:mb-4",
+                  head_cell: "text-foreground w-9 sm:w-10 font-bold text-sm sm:text-lg text-center transition-colors duration-500",
                   row: "flex w-full mt-2 justify-between",
                   cell: "text-center relative p-0",
-                  day: "h-10 w-10 p-0 font-medium rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-500 flex items-center justify-center text-base text-foreground",
+                  day: "h-9 w-9 sm:h-10 sm:w-10 p-0 font-medium rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-500 flex items-center justify-center text-sm sm:text-base text-foreground",
                   day_selected: "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground font-bold shadow-md shadow-primary/30 rounded-md",
                   day_today: "font-bold text-primary",
                   day_outside: "text-muted-foreground/30 opacity-50 transition-colors duration-500",

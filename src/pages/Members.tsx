@@ -72,11 +72,11 @@ const MemberCard = ({ member, index }: { member: MemberDetails, index: number })
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.26, delay: (index % 5) * 0.05 }}
-      className="perspective-1000 w-full h-full"
+      className="perspective-1000 w-full h-full will-change-transform will-change-opacity"
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
-        className="w-full h-full relative preserve-3d cursor-pointer rounded-2xl"
+        className="w-full h-full relative preserve-3d cursor-pointer rounded-2xl transform-gpu will-change-transform"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
       >
@@ -86,8 +86,9 @@ const MemberCard = ({ member, index }: { member: MemberDetails, index: number })
             <img
               src={member.image}
               alt={member.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
               loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
@@ -102,19 +103,19 @@ const MemberCard = ({ member, index }: { member: MemberDetails, index: number })
           <div className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground transition-colors">
              <X className="w-4 h-4" />
           </div>
-          <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1 line-clamp-2">{member.position}</p>
-          <h3 className="text-xs font-semibold mb-3">{member.name}</h3>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-0.5 line-clamp-3 leading-tight">{member.position}</p>
+          <h3 className="text-xs font-semibold mb-1.5">{member.name}</h3>
           
-          <div className="space-y-2 w-full mt-2">
-             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-black/5 dark:bg-white/5 px-3 py-2 rounded-full">
+          <div className="space-y-1 w-full mt-1">
+             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-black/5 dark:bg-white/5 px-3 py-1.5 rounded-full">
                 <Phone className="w-3 h-3 shrink-0" />
                 <span className="truncate">{member.phone || "Not Provided"}</span>
              </div>
-             <a href={member.instagramUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-2 rounded-full transition-colors w-full">
+             <a href={member.instagramUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-1.5 rounded-full transition-colors w-full">
                <Instagram className="w-3 h-3 shrink-0" />
                <span className="truncate">{member.instaHandle || "Not Provided"}</span>
              </a>
-             <a href={member.linkedinUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-2 rounded-full transition-colors w-full">
+             <a href={member.linkedinUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-1.5 rounded-full transition-colors w-full">
                <Linkedin className="w-3 h-3 shrink-0" />
                <span className="truncate">{member.linkedinHandle || "Not Provided"}</span>
              </a>
