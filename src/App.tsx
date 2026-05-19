@@ -17,6 +17,7 @@ import Avenue from "./pages/Avenue";
 import Info from "./pages/Info";
 import Join from "./pages/Join";
 import BODApplication from "./pages/BODApplication";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 import { ThemeProvider } from "./components/theme-provider";
@@ -40,6 +41,7 @@ const AnimatedRoutes = () => {
         <Route path="/avenue" element={<PageTransition><Avenue /></PageTransition>} />
         <Route path="/info" element={<PageTransition><Info /></PageTransition>} />
         <Route path="/join" element={<PageTransition><Join /></PageTransition>} />
+        <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
         <Route path="/bod-application" element={<PageTransition><BODApplication /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>

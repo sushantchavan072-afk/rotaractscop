@@ -1,12 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Phone, Instagram, Linkedin, X } from "lucide-react";
 
 interface MemberDetails {
   name: string;
   position: string;
   image: string;
   category: "core" | "bod" | "general";
+  phone?: string;
+  instagramUrl?: string;
+  instaHandle?: string;
+  linkedinUrl?: string;
+  linkedinHandle?: string;
 }
 
 const allMembers: MemberDetails[] = [
@@ -56,6 +62,68 @@ const filterOptions = [
   { key: "bod", label: "BOD" },
   { key: "general", label: "GBM" },
 ];
+
+const MemberCard = ({ member, index }: { member: MemberDetails, index: number }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.94 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ duration: 0.26, delay: (index % 5) * 0.05 }}
+      className="perspective-1000 w-full h-full"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <motion.div
+        className="w-full h-full relative preserve-3d cursor-pointer rounded-2xl"
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
+      >
+        {/* Front Face */}
+        <div className="backface-hidden glass glass-lift rounded-2xl overflow-hidden group flex flex-col w-full h-full relative z-10 bg-background/50">
+          <div className="aspect-square overflow-hidden relative shrink-0">
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+          <div className="p-3.5 flex flex-col justify-center flex-grow bg-card/40 backdrop-blur-md">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">{member.position}</p>
+            <h3 className="text-xs font-semibold leading-snug line-clamp-2">{member.name}</h3>
+          </div>
+        </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 glass glass-strong rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-2xl z-0 overflow-hidden border border-primary/20 bg-card/90 backdrop-blur-xl">
+          <div className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground transition-colors">
+             <X className="w-4 h-4" />
+          </div>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1 line-clamp-2">{member.position}</p>
+          <h3 className="text-xs font-semibold mb-3">{member.name}</h3>
+          
+          <div className="space-y-2 w-full mt-2">
+             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-black/5 dark:bg-white/5 px-3 py-2 rounded-full">
+                <Phone className="w-3 h-3 shrink-0" />
+                <span className="truncate">{member.phone || "Not Provided"}</span>
+             </div>
+             <a href={member.instagramUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-2 rounded-full transition-colors w-full">
+               <Instagram className="w-3 h-3 shrink-0" />
+               <span className="truncate">{member.instaHandle || "Not Provided"}</span>
+             </a>
+             <a href={member.linkedinUrl || "#"} onClick={e => e.stopPropagation()} className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-white bg-black/5 dark:bg-white/5 hover:bg-primary px-3 py-2 rounded-full transition-colors w-full">
+               <Linkedin className="w-3 h-3 shrink-0" />
+               <span className="truncate">{member.linkedinHandle || "Not Provided"}</span>
+             </a>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Members = () => {
   const [filter, setFilter] = useState("all");
@@ -128,29 +196,9 @@ const Members = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-stretch">
                   {members.map((member, i) => (
-                    <motion.div
-                      key={member.name}
-                      initial={{ opacity: 0, scale: 0.94 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-20px" }}
-                      transition={{ duration: 0.26, delay: (i % 5) * 0.05 }}
-                      className="glass glass-lift rounded-2xl overflow-hidden group"
-                    >
-                      <div className="aspect-square overflow-hidden">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div className="p-3.5">
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">{member.position}</p>
-                        <h3 className="text-xs font-semibold leading-snug line-clamp-2">{member.name}</h3>
-                      </div>
-                    </motion.div>
+                    <MemberCard key={member.name} member={member} index={i} />
                   ))}
                 </div>
               </motion.section>

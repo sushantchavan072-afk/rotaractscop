@@ -20,24 +20,28 @@ const Info = () => {
   ];
 
   const clubDetails = [
-    { title: "Club Charter", items: [
-      { label: "Club ID", value: "8826281" },
-      { label: "Charter Date", value: "12 March 2024" },
-      { label: "RI District", value: "3131" },
-      { label: "Sponsor Club", value: "Rotary Club Of Pune Nanded City" },
-    ]},
-    { title: "Membership", items: [
-      { label: "Active Members", value: "30+" },
-      { label: "Board Members", value: "14" },
-      { label: "Avenue", value: "7" },
-      { label: "Age Range", value: "18-30 years" },
-    ]},
+    {
+      title: "Club Charter", items: [
+        { label: "Club ID", value: "8826281" },
+        { label: "Charter Date", value: "12 March 2024" },
+        { label: "RI District", value: "3131" },
+        { label: "Sponsor Club", value: "Rotary Club Of Pune Nanded City" },
+      ]
+    },
+    {
+      title: "Membership", items: [
+        { label: "Active Members", value: "30+" },
+        { label: "Board Members", value: "14" },
+        { label: "Avenue", value: "7" },
+        { label: "Age Range", value: "18-30 years" },
+      ]
+    },
   ];
 
   const faq = [
     { question: "What is Rotaract?", answer: "Rotaract is a global movement of young leaders who take action in their communities and beyond. We focus on leadership development, professional development, and service above self." },
     { question: "Who can join?", answer: "Any young professional or student aged 18-30 who is passionate about making a difference in their community can join our club." },
-    { question: "What are the membership requirements?", answer: "Members should be committed to attending regular meetings, participating in service projects, and contributing to the club's mission of service and leadership development." },
+    { question: "What are the membership requirements?", answer: "To be a Member, Person must be a sinhgad institute student and should be committed to attending regular meetings, participating in service projects, and contributing to the club's mission of service and leadership development." },
     { question: "Are there membership fees?", answer: "Yes, there is a nominal annual membership fee that covers club operations, event costs, and Rotary International dues. Contact us for current rates." },
   ];
 

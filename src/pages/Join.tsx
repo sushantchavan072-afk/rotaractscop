@@ -18,10 +18,10 @@ const STEPS = [
   { label: "Motivation", icon: Heart },
 ];
 
-const slide = {
-  hidden: (dir: number) => ({ opacity: 0, x: dir * 28 }),
-  visible: { opacity: 1, x: 0, transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] } },
-  exit: (dir: number) => ({ opacity: 0, x: -dir * 28, transition: { duration: 0.22 } }),
+const blurFade = {
+  hidden: (dir: number) => ({ opacity: 0, filter: "blur(8px)", x: dir * 15, scale: 0.98 }),
+  visible: { opacity: 1, filter: "blur(0px)", x: 0, scale: 1, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  exit: (dir: number) => ({ opacity: 0, filter: "blur(8px)", x: -dir * 15, scale: 0.98, transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as const } }),
 };
 
 const FieldGroup = ({ children, cols = 1 }: { children: React.ReactNode; cols?: number }) => (
@@ -214,7 +214,7 @@ const Join = () => {
               <motion.form
                 key={`step-${step}`}
                 custom={dir}
-                variants={slide}
+                variants={blurFade}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -238,7 +238,7 @@ const Join = () => {
                       <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-3">Requirements</h3>
                       <ul className="space-y-2 text-[14px] text-muted-foreground font-medium">
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> Age between 18–30 years</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> Commitment to service and leadership</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> Must be a Sinhgad Institute student</li>
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> Ability to attend regular meetings</li>
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> Annual membership fee applies</li>
                       </ul>

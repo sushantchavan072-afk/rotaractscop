@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, Home, Info, Calendar, Users, Briefcase, UserPlus, Moon, Sun } from "lucide-react";
+import { Menu, Home, Info, Calendar, Users, Briefcase, UserPlus, Moon, Sun, LogIn } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import logo from "@/assets/logo.png";
 
@@ -12,6 +12,7 @@ const navLinks = [
   { path: "/members", label: "Members", icon: Users },
   { path: "/avenue", label: "Avenue", icon: Briefcase },
   { path: "/info", label: "Info", icon: Info },
+  { path: "/join", label: "Join Us", icon: UserPlus },
 ];
 
 const Navbar = () => {
@@ -45,7 +46,7 @@ const Navbar = () => {
         >
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">
-            {[...navLinks, { path: "/join", label: "Join Us", icon: UserPlus }].map((link, i) => (
+            {[...navLinks, { path: "/login", label: "Login", icon: LogIn }].map((link, i) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -144,7 +145,7 @@ const Navbar = () => {
               transition={{ type: "spring", stiffness: 350, damping: 25 }}
               className="lg:hidden absolute top-[calc(100%+16px)] left-0 right-0 w-full bg-card rounded-[2rem] p-3 shadow-2xl flex flex-col gap-1 border border-border origin-top z-40"
             >
-              {[...navLinks, { path: "/join", label: "Join Us", icon: UserPlus }].map((link) => {
+              {[...navLinks, { path: "/login", label: "Login", icon: LogIn }].map((link) => {
                 const active = isActive(link.path);
                 const Icon = link.icon;
                 return (
@@ -154,7 +155,7 @@ const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     className={`relative flex items-center px-5 py-3.5 rounded-full text-[15px] font-bold transition-all overflow-hidden group ${
                       active ? "text-primary-foreground" : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
-                    } ${link.path === "/join" && !active ? "text-primary mt-2 bg-primary/5" : ""}`}
+                    } ${link.path === "/login" && !active ? "text-primary mt-2 bg-primary/5" : ""}`}
                   >
                     <span className="relative z-10 flex items-center gap-4">
                       <Icon className={`w-[18px] h-[18px] transition-colors ${active ? "text-primary-foreground" : "text-primary/60 group-hover:text-primary"}`} />
