@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Instagram, Mail, Rotate3D, Users } from "lucide-react";
+import { Badge, Instagram, Phone, Rotate3D, Users } from "lucide-react";
 import AmeetPhoto from "@/assets/Members/Ameet professional photo.jpg";
 import AditiPhoto from "@/assets/Members/Aditi Gandhi.jpg";
 import AmrutaPhoto from "@/assets/Members/Amruta Potdukhe.jpg";
+import rotaractLogo from "@/assets/rotaract_logo_without_name.png";
 import ChaitanyaPhoto from "@/assets/Members/Rtr. Chaitanya.jpg";
 import ChaitraliPhoto from "@/assets/Members/Rtr. Chaitrali Dave.jpg";
 import DhanashriPhoto from "@/assets/Members/Dhanashri professional photo.jpg";
@@ -31,6 +32,9 @@ interface MemberDetails {
   image?: string;
   category: "core" | "bod" | "general";
   bio?: string;
+  instagram?: string;
+  rotaryId?: string;
+  phone?: string;
 }
 
 const allMembers: MemberDetails[] = [
@@ -38,9 +42,9 @@ const allMembers: MemberDetails[] = [
   { name: "Chaitrali Dave", position: "Vice President", image: ChaitraliPhoto, category: "core", bio: "Supports the club’s direction by turning ideas into thoughtful, coordinated action." },
   { name: "Amruta Potdukhe", position: "Secretary", image: AmrutaPhoto, category: "core", bio: "Keeps communication, planning, and follow-through moving with intention." },
   { name: "Shubham Pawar", position: "Treasurer", image: ShubhamPhoto, category: "core", bio: "Brings structure and responsibility to the systems that support our impact." },
-  { name: "Pragama Magotra", position: "Immediate Past President", image: PragamaPhoto, category: "core", bio: "Carries forward institutional memory while helping the next team grow with confidence." },
+  { name: "Pragama Magotra", position: "Immediate Past President & RRRO", image: PragamaPhoto, category: "core", bio: "Carries forward institutional memory while helping the next team grow with confidence." },
   { name: "Prerna Bhilare", position: "Club Advisor", image: PrernaPhoto, category: "core", bio: "Offers perspective and continuity as the club moves between seasons of service." },
-  { name: "Rajadnya Khandale", position: "Jt. Secretary and Community Service Director", image: RajadnyaPhoto, category: "bod", bio: "Connects administration with community-focused action and meaningful participation." },
+  { name: "Rajadnya Khandale", position: "Jt. Secretary & CMD", image: RajadnyaPhoto, category: "bod", bio: "Connects administration with community-focused action and meaningful participation." },
   { name: "Govind Choudhary", position: "Editor and Jt. Public Image Director", image: GovindPhoto, category: "bod", bio: "Shapes the visual voice of the club and helps its stories travel further." },
   { name: "Yogiraj", position: "Sports Director – Indoor", image: YogirajPhoto, category: "bod" },
   { name: "Ameet Bhosale", position: "Sports Director – Outdoor", image: AmeetPhoto, category: "bod" },
@@ -48,10 +52,10 @@ const allMembers: MemberDetails[] = [
   { name: "Chaitanya Gandhare", position: "Professional Assistance Officer", image: ChaitanyaPhoto, category: "bod" },
   { name: "Shubhankar Patil", position: "International Service Director", image: ShubhankarPhoto, category: "bod" },
   { name: "Arya Shinde", position: "Public Relations Officer", image: AryaShindePhoto, category: "bod" },
-  { name: "Kushal Damoor", position: "Sergeant At Arms and World Rotaract Week Chairperson", image: KushalPhoto, category: "bod" },
-  { name: "Aditi Gandhi", position: "Diversity, Equity and Inclusion Director", image: AditiPhoto, category: "bod" },
+  { name: "Kushal Damoor", position: "SAA & WRWC", image: KushalPhoto, category: "bod" },
+  { name: "Aditi Gandhi", position: "DEI Director", image: AditiPhoto, category: "bod" },
   { name: "Harshada Shinde", position: "Jt. Public Relations Officer", image: HarshadaPhoto, category: "bod" },
-  { name: "Prajakta Munde", position: "Interact Rotary Rotaract Relations Officer", image: PrajaktaPhoto, category: "bod" },
+  { name: "Prajakta Munde", position: "Interact Rotaract Relations Officer", image: PrajaktaPhoto, category: "bod" },
   { name: "Geeta Wagh", position: "Professional Development Director", image: GeetaPhoto, category: "bod" },
   { name: "Prayag Pokale", position: "Membership Development Director", image: PrayagPhoto, category: "bod" },
   { name: "Dhanashri Choudhari", position: "Public Image Director", image: DhanashriPhoto, category: "bod" },
@@ -70,6 +74,33 @@ const sections: { key: "core" | "bod" | "general"; title: string; subtitle: stri
 
 const getInitials = (name: string) => name.split(" ").map((part) => part[0]).slice(0, 2).join("").toUpperCase();
 const displayName = (name: string) => name.startsWith("Rtr.") ? name : `Rtr. ${name}`;
+const displayFirstName = (name: string) => `Rtr. ${name.replace(/^Rtr\.\s*/, "").split(" ")[0]}`;
+const shortPosition = (position: string) => ({
+  "President": "Pres.",
+  "Vice President": "VP",
+  "Secretary": "Sec.",
+  "Treasurer": "Treas.",
+  "Immediate Past President": "IPP",
+  "Immediate Past President & RRRO": "IPP & RRRO",
+  "Club Advisor": "Advisor",
+  "Jt. Secretary & CMD": "Jt. Sec. & CMD",
+  "Editor and Jt. Public Image Director": "Editor & Jt. PID",
+  "Sports Director – Indoor": "Sports Dir. – Indoor",
+  "Sports Director – Outdoor": "Sports Dir. – Outdoor",
+  "Club Service Director": "CSD",
+  "Professional Assistance Officer": "PAO",
+  "International Service Director": "ISD",
+  "Public Relations Officer": "PRO",
+  "SAA & WRWC": "SAA & WRWC",
+  "DEI Director": "DEI",
+  "Jt. Public Relations Officer": "Jt. PRO",
+  "Interact Rotaract Relations Officer": "IRRO",
+  "Professional Development Director": "PDD",
+  "Membership Development Director": "CMD",
+  "Public Image Director": "PID",
+  "General Body Member": "GBM",
+}[position] ?? position);
+const demoContact = { instagram: "@member_demo", rotaryId: "RID-0001", phone: "+91 90000 00000" };
 
 const MemberPhoto = ({ member }: { member: MemberDetails }) => (
   <div className="relative aspect-square shrink-0 overflow-hidden bg-gradient-to-br from-primary/90 via-primary to-rose-500">
@@ -86,7 +117,7 @@ const MemberPhoto = ({ member }: { member: MemberDetails }) => (
 
 const MemberFooter = ({ member }: { member: MemberDetails }) => (
   <div className="flex min-h-[4.25rem] flex-col justify-center bg-card/40 p-2.5 backdrop-blur-md sm:min-h-[5.5rem] sm:p-3.5">
-    <p className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-primary sm:text-[10px] sm:tracking-wider">{member.position}</p>
+    <p className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-primary sm:text-[10px] sm:tracking-wider"><span className="sm:hidden">{member.category === "core" ? member.position : shortPosition(member.position)}</span><span className="hidden sm:inline">{member.position}</span></p>
     <h3 className="line-clamp-2 text-[11px] font-semibold leading-tight sm:text-xs sm:leading-snug">{displayName(member.name)}</h3>
   </div>
 );
@@ -100,14 +131,14 @@ const MemberCard = React.memo(({ member, index }: { member: MemberDetails; index
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.26, delay: (index % 5) * 0.05 }}
-      className="relative h-full w-full [perspective:1100px]"
+      className="relative h-auto w-full [perspective:1100px] sm:h-full"
     >
       <button
         type="button"
         aria-label={`${flipped ? "Show front of" : "Flip"} ${displayName(member.name)}'s member card`}
         aria-pressed={flipped}
         onClick={() => setFlipped((value) => !value)}
-        className="group relative min-h-[14rem] w-full rounded-2xl text-left sm:min-h-[19rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="group relative aspect-[0.7] min-h-0 w-full rounded-2xl text-left sm:aspect-auto sm:min-h-[19rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <motion.div
           animate={{ rotateY: flipped ? 180 : 0 }}
@@ -123,13 +154,15 @@ const MemberCard = React.memo(({ member, index }: { member: MemberDetails; index
           <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/30 bg-primary p-3 text-primary-foreground sm:p-5 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground/70">Member profile</p>
-              <h3 className="mt-2 text-base font-bold leading-tight sm:mt-3 sm:text-xl">{displayName(member.name)}</h3>
+              <h3 className="mt-2 text-base font-bold leading-tight sm:mt-3 sm:text-xl">{displayFirstName(member.name)}</h3>
               <p className="mt-1 text-[11px] font-medium leading-snug text-primary-foreground/80 sm:mt-2 sm:text-sm">{member.position}</p>
+              <div className="mt-4 space-y-1.5 text-[10px] leading-tight text-primary-foreground/85 sm:mt-5 sm:text-[11px]">
+                <p className="flex items-center gap-1.5"><Instagram className="h-3 w-3 shrink-0" aria-hidden="true" />{member.instagram ?? demoContact.instagram}</p>
+                <p className="flex items-center gap-1.5"><Badge className="h-3 w-3 shrink-0" aria-hidden="true" />{member.rotaryId ?? demoContact.rotaryId}</p>
+                <p className="flex items-center gap-1.5"><Phone className="h-3 w-3 shrink-0" aria-hidden="true" />{member.phone ?? demoContact.phone}</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2 self-end" aria-label="Member contact options">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground" title="Instagram profile placeholder"><Instagram className="h-4 w-4" aria-hidden="true" /></span>
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground" title="Email placeholder"><Mail className="h-4 w-4" aria-hidden="true" /></span>
-            </div>
+            <img src={rotaractLogo} alt="Rotaract logo" className="absolute bottom-3 right-3 w-24 object-contain sm:bottom-4 sm:right-4 sm:w-28" />
           </div>
         </motion.div>
       </button>
@@ -157,7 +190,7 @@ const Members = () => {
             return (
               <motion.section key={section.key} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.32, delay: sectionIndex * 0.08 }} className="mb-14 last:mb-0">
                 <div className="mb-7"><h2 className="mb-2 text-2xl font-bold">{section.title}</h2><div className="inline-block"><div className="mb-2 h-0.5 w-full rounded-full bg-primary opacity-80" /><p className="text-sm text-muted-foreground">{section.subtitle}</p></div></div>
-                <div className="grid grid-cols-2 items-stretch gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
+                <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 sm:items-stretch sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
                   {members.map((member, index) => <MemberCard key={member.name} member={member} index={index} />)}
                 </div>
               </motion.section>

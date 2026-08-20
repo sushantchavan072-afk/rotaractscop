@@ -60,7 +60,7 @@ const achievementGroups = [
       "Outstanding Club Advisor (Institute Club) — Rtr. Srushti Lahamge",
       "Outstanding PDD (Institute Club) — Rtr. Vedanti Khardikar",
       "Outstanding CMD (Institute Club) — Rtr. Mrunal Potharkar",
-      "Outstanding ISD (Institute Club) — Rtr. Amruta Pothdukh",
+      "Outstanding ISD (Institute Club) — Rtr. Amruta Potdukhe",
       "Outstanding RRRO (Institute Club) — Rtr. Aditi Gandhi",
       "Outstanding Sports Director (Institute Club) — Rtr. Bhumi Sharma",
       "Outstanding Public Relations (Institute Club) — Rtr. Sushant Chavan & Rtr. Chaitanya Jadhav",
@@ -332,7 +332,7 @@ const Home = () => {
                 day_disabled: "text-muted-foreground/30",
               }}
             />
-            <p className="mt-4 text-center text-xs text-muted-foreground">Select a highlighted date to view its events.</p>
+            <p className="mx-auto mt-4 max-w-[16rem] px-2 text-center text-[11px] leading-5 text-muted-foreground sm:max-w-none sm:px-0 sm:text-xs">Select a highlighted date to view its events.</p>
           </div>
           <div className="min-w-0 p-2 sm:p-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-4"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Latest additions</p><h3 className="mt-1 text-xl font-bold">Upcoming on the club calendar</h3></div><Calendar className="h-5 w-5 text-primary" /></div>

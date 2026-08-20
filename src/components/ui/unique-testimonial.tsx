@@ -46,6 +46,18 @@ export function Testimonials() {
     };
   }, []);
 
+  useEffect(() => {
+    const rotation = window.setInterval(() => {
+      setIsAnimating(true);
+      timeoutRef.current = window.setTimeout(() => {
+        setActiveIndex((current) => (current + 1) % testimonials.length);
+        setIsAnimating(false);
+      }, 180);
+    }, 5000);
+
+    return () => window.clearInterval(rotation);
+  }, []);
+
   const handleSelect = (index: number) => {
     if (index === activeIndex || isAnimating) return;
     setIsAnimating(true);

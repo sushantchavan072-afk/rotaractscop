@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, BookOpen, Droplets, Globe2, HandHeart, HeartPulse, Leaf, Scale, Sprout, Users } from "lucide-react";
-import rotaryLogo from "@/assets/Rotary Logo_EN21_DynamicSize_FontUpdate.png";
+import rotaryLogo from "@/assets/rotary.png";
 
 const areasOfFocus = [
   { name: "Peacebuilding and conflict prevention", icon: Scale, color: "text-sky-600", bg: "bg-sky-500/10" },

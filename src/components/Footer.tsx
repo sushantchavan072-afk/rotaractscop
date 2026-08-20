@@ -39,7 +39,7 @@ const Footer = () => (
                   Rotaract Club of Sinhgad College Of Pharmacy
                 </span>
               </h3>
-              <p className="text-[13px] text-muted-foreground font-devanagari">सेवा संगठन परिवर्तन</p>
+              <p className="text-[13px] text-muted-foreground">Woven By We</p>
             </div>
           </div>
           <p className="text-xs text-muted-foreground leading-relaxed">
