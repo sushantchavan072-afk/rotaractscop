@@ -39,6 +39,18 @@ export const EVENTS_DATA = [
     description: "A Joyful Saturday is a multi-avenue community event bringing together Rotaract Club of Sinhgad College of Pharmacy and Rotary Club of Pune Nanded City. Featuring service activities, creative sessions, learning, and community engagement across 7 avenues, the event aims to create a meaningful day filled with service, creativity, learning & smiles.",
     image: ananddayiShanivarImage,
   },
+    {
+    title: "Inner Excellence",
+    date: "September 06, 2026",
+    month: "September",
+    time: "11.30 AM",
+    avenue: "PAO,PDD,CMD",
+    location: "SCOP, Seminar School",
+    attendees: "-",
+    status: "Coming Soon",
+    description: "Inner Excellence is an interactive professional development session with BK Mitali, focusing on self-awareness, confidence, stress management, leadership, and balancing ambition with happiness.",
+    image: Image,
+  },
 ] as const;
 
 export type Event = typeof EVENTS_DATA[number];
