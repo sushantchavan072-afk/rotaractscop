@@ -1,14 +1,19 @@
-import { Instagram, Twitter, Linkedin, Youtube, MapPin, Mail, Phone } from "lucide-react";
+import { SiInstagram, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
+import { MapPin, Mail, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 
 const socials = [
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+  { icon: SiInstagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: SiX, href: "https://twitter.com", label: "Twitter" },
+  { icon: LinkedInIcon, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: SiYoutube, href: "https://youtube.com", label: "YouTube" },
 ];
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return <span className={`font-bold leading-none ${className ?? ""}`} aria-hidden="true">in</span>;
+}
 
 const quickLinks = [
   { to: "/", label: "Home" },
@@ -21,7 +26,7 @@ const quickLinks = [
 ];
 
 const Footer = () => (
-  <footer className="bg-white/80 dark:bg-card/40 backdrop-blur-xl border-t border-white/40 dark:border-white/10 mt-auto">
+  <footer className="mt-auto border-t border-white/40 bg-white/80 dark:border-white/10 dark:bg-card/40 backdrop-blur-xl">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
 

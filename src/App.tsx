@@ -1,7 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -30,8 +29,6 @@ const BODApplication = lazy(() => import("./pages/BODApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 import { ThemeProvider } from "./components/theme-provider";
-
-const queryClient = new QueryClient();
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -76,16 +73,15 @@ const App = () => {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="rotaract-theme">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <RouteSeo />
-            <Analytics />
-            <ClickSpark sparkColor="theme" sparkSize={8} sparkRadius={18} sparkCount={8} duration={420}>
-              <div 
-                className="site-shell relative isolate flex min-h-screen flex-col bg-background text-foreground"
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <RouteSeo />
+          <Analytics />
+          <ClickSpark sparkColor="theme" sparkSize={8} sparkRadius={18} sparkCount={8} duration={420}>
+            <div
+              className="site-shell relative isolate flex min-h-screen flex-col bg-background text-foreground"
               style={{
                 backgroundImage: 'radial-gradient(at 0% 0%, hsla(339,78%,48%,0.12) 0px, transparent 50%), radial-gradient(at 100% 100%, hsla(38,100%,74%,0.15) 0px, transparent 50%)'
               }}
@@ -95,13 +91,12 @@ const App = () => {
               <main className="relative z-10 flex-1 pt-24 pb-12 sm:pt-28">
                 <AnimatedRoutes />
               </main>
-                <div className="relative z-10"><Footer /></div>
-              </div>
-            </ClickSpark>
-            <SiteCursor />
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
+              <div className="relative z-10"><Footer /></div>
+            </div>
+          </ClickSpark>
+          <SiteCursor />
+        </BrowserRouter>
+      </TooltipProvider>
     </ThemeProvider>
   );
 };

@@ -1,6 +1,8 @@
 import brandscapeImage from "@/assets/Events/BRANDSCAPE.jpeg";
 import paintscapeImage from "@/assets/Events/PAINTSCAPE.jpeg";
 import ananddayiShanivarImage from "@/assets/Events/आनंददायीशनिवार.jpeg";
+import innerExcellenceImage from "@/assets/Events/inner excellence.jpeg";
+import shuttleShowdownImage from "@/assets/Events/SHUTTLE SHOWDOWN.jpeg";
 
 export const EVENTS_DATA = [
   {
@@ -47,9 +49,21 @@ export const EVENTS_DATA = [
     avenue: "PAO,PDD,CMD",
     location: "SCOP, Seminar School",
     attendees: "-",
-    status: "Coming Soon",
+    status: "Completed",
     description: "Inner Excellence is an interactive professional development session with BK Mitali, focusing on self-awareness, confidence, stress management, leadership, and balancing ambition with happiness.",
-    image: Image,
+    image: innerExcellenceImage,
+  },
+  {
+    title: "Shuttle Showdown (Badminton)",
+    date: "October 1, 2026",
+    month: "October",
+    time: "11.00 AM – 2.00 PM",
+    avenue: "PRO, CSD & SD",
+    location: "Nahata Sports Complex",
+    attendees: "20+ members",
+    status: "Completed",
+    description: "Get ready for Shuttle Showdown, a lively badminton event bringing Rotaractors together for friendly competition, great rallies, and plenty of team spirit. Join us on court for an energetic day of sport and fellowship.",
+    image: shuttleShowdownImage,
   },
 ] as const;
 

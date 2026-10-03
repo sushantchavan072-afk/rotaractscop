@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Quote } from "lucide-react";
 import aditiPhoto from "@/assets/Members/Aditi Gandhi.jpg";
-import pranjalPhoto from "@/assets/Members/Rtr. Pranjal landge.jpg";
 
 const testimonials = [
   {
@@ -10,20 +8,6 @@ const testimonials = [
     author: "Aditi Mahendra Gandhi",
     displayName: "Rtr. Aditi",
     avatar: aditiPhoto,
-  },
-  {
-    id: 2,
-    quote: "Every project becomes a lesson in leadership, teamwork, and showing up for the community.",
-    author: "Onkar Sushil Deshpande",
-    displayName: "Rtr. Onkar",
-    avatar: undefined,
-  },
-  {
-    id: 3,
-    quote: "The strongest part of Rotaract is the people: a network that helps you grow while you help others.",
-    author: "Pranjal Landge",
-    displayName: "Rtr. Pranjal",
-    avatar: pranjalPhoto,
   },
 ];
 
@@ -47,6 +31,7 @@ export function Testimonials() {
   }, []);
 
   useEffect(() => {
+    if (testimonials.length < 2) return;
     const rotation = window.setInterval(() => {
       setIsAnimating(true);
       timeoutRef.current = window.setTimeout(() => {
@@ -59,7 +44,7 @@ export function Testimonials() {
   }, []);
 
   const handleSelect = (index: number) => {
-    if (index === activeIndex || isAnimating) return;
+    if (index === activeIndex || isAnimating || testimonials.length < 2) return;
     setIsAnimating(true);
     timeoutRef.current = window.setTimeout(() => {
       setActiveIndex(index);
@@ -83,8 +68,16 @@ export function Testimonials() {
           <span className="pointer-events-none absolute -bottom-8 -right-1 select-none font-serif text-7xl leading-none text-primary/[0.16]" aria-hidden="true">”</span>
         </div>
 
+        <div className="flex items-center gap-3 text-center">
+          {activeTestimonial.avatar && <img src={activeTestimonial.avatar} alt="" className="h-11 w-11 rounded-full object-cover" loading="lazy" decoding="async" />}
+          <div className="text-left">
+            <p className="font-semibold text-foreground">{activeTestimonial.displayName}</p>
+            <p className="text-xs text-muted-foreground">{activeTestimonial.author}</p>
+          </div>
+        </div>
+
         <div className="flex flex-col items-center gap-5">
-          <div className="flex w-full max-w-[18rem] flex-nowrap items-center justify-center gap-2 sm:max-w-none sm:gap-3" role="tablist" aria-label="Testimonials">
+          {testimonials.length > 1 && <div className="flex w-full max-w-[18rem] flex-nowrap items-center justify-center gap-2 sm:max-w-none sm:gap-3" role="tablist" aria-label="Testimonials">
             {testimonials.map((testimonial, index) => {
               const isActive = activeIndex === index;
               const showName = isActive || (isFinePointer && hoveredIndex === index);
@@ -107,7 +100,7 @@ export function Testimonials() {
                 </button>
               );
             })}
-          </div>
+          </div>}
         </div>
       </div>
     </section>

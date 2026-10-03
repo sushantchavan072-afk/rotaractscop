@@ -309,27 +309,26 @@ const Home = () => {
               selected={date}
               onSelect={handleDateSelect}
               modifiers={{ hasEvent: eventDates }}
-              modifiersClassNames={{ hasEvent: "text-primary font-extrabold underline decoration-2 underline-offset-4" }}
+              modifiersClassNames={{ hasEvent: "[&>button]:text-primary [&>button]:font-extrabold [&>button]:underline [&>button]:decoration-2 [&>button]:underline-offset-4" }}
               className="mx-auto w-full max-w-full overflow-hidden bg-transparent"
               classNames={{
                 months: "w-full",
                 month: "w-full space-y-4",
-                caption: "flex w-full items-center justify-between border-b border-border/60 pb-4",
+                month_caption: "flex w-full items-center justify-between border-b border-border/60 pb-4",
                 caption_label: "text-base font-bold tracking-tight text-foreground sm:text-xl",
-                nav: "flex gap-2",
-                nav_button: "flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
-                nav_button_previous: "relative",
-                nav_button_next: "relative",
-                table: "w-full border-collapse",
-                head_row: "mb-1 flex w-full justify-between sm:mb-2",
-                head_cell: "w-8 text-center text-[10px] font-semibold text-muted-foreground sm:w-10 sm:text-xs",
-                row: "mt-1 flex w-full justify-between sm:mt-2",
-                cell: "p-0 text-center",
-                day: "flex h-8 w-8 items-center justify-center rounded-lg text-xs text-foreground transition-colors hover:bg-primary/10 sm:h-10 sm:w-10 sm:text-sm",
-                day_selected: "bg-primary font-bold text-primary-foreground hover:bg-primary/90",
-                day_today: "font-bold text-primary",
-                day_outside: "text-muted-foreground/30",
-                day_disabled: "text-muted-foreground/30",
+                nav: "ml-auto flex shrink-0 gap-2",
+                button_previous: "flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+                button_next: "flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+                month_grid: "w-full border-collapse",
+                weekdays: "mb-1 flex w-full justify-between sm:mb-2",
+                weekday: "w-8 text-center text-[10px] font-semibold text-muted-foreground sm:w-10 sm:text-xs",
+                week: "mt-1 flex w-full justify-between sm:mt-2",
+                day: "p-0 text-center",
+                day_button: "flex h-8 w-8 items-center justify-center rounded-lg text-xs text-foreground transition-colors hover:bg-primary/10 sm:h-10 sm:w-10 sm:text-sm",
+                selected: "[&>button]:bg-primary [&>button]:font-bold [&>button]:text-primary-foreground [&>button]:hover:bg-primary/90",
+                today: "[&>button]:font-bold [&>button]:text-primary",
+                outside: "[&>button]:text-muted-foreground/30",
+                disabled: "[&>button]:text-muted-foreground/30",
               }}
             />
             <p className="mx-auto mt-4 max-w-[16rem] px-2 text-center text-[11px] leading-5 text-muted-foreground sm:max-w-none sm:px-0 sm:text-xs">Select a highlighted date to view its events.</p>
@@ -337,7 +336,7 @@ const Home = () => {
           <div className="min-w-0 p-2 sm:p-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-4"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Latest additions</p><h3 className="mt-1 text-xl font-bold">Upcoming on the club calendar</h3></div><Calendar className="h-5 w-5 text-primary" /></div>
             <div className="mt-3 divide-y divide-border/60">
-              {recentEvents.map((event) => <button key={event.title} type="button" onClick={() => handleUpcomingEventClick(event)} className="group flex w-full items-center gap-4 py-4 text-left transition-colors sm:gap-5"><div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-muted sm:h-16 sm:w-16"><img src={event.image} alt={event.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" /></div><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground sm:text-base">{event.title}</p><p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Calendar className="h-3.5 w-3.5 text-primary" />{event.date}</p><p className="mt-1 flex items-center gap-1.5 truncate text-xs text-muted-foreground"><MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />{event.location}</p></div><ArrowUpRight className="hidden h-4 w-4 shrink-0 text-muted-foreground sm:block" /></button>)}
+              {recentEvents.map((event) => <button key={event.title} type="button" onClick={() => handleUpcomingEventClick(event)} className="group flex w-full items-center gap-4 py-4 text-left transition-colors sm:gap-5"><div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-muted sm:h-16 sm:w-16"><img src={event.image} alt={event.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" decoding="async" /></div><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground sm:text-base">{event.title}</p><p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Calendar className="h-3.5 w-3.5 text-primary" />{event.date}</p><p className="mt-1 flex items-center gap-1.5 truncate text-xs text-muted-foreground"><MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />{event.location}</p></div><ArrowUpRight className="hidden h-4 w-4 shrink-0 text-muted-foreground sm:block" /></button>)}
             </div>
           </div>
         </div>
@@ -416,7 +415,7 @@ const Home = () => {
                   className="flex gap-4 p-4 rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5 items-center hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
                   <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 shadow-sm">
-                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" decoding="async" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-foreground text-lg leading-tight mb-1">{event.title}</h4>

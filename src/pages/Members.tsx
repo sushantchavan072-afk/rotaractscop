@@ -1,36 +1,31 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Badge, Instagram, Phone, Rotate3D, Users } from "lucide-react";
+import { SiInstagram } from "@icons-pack/react-simple-icons";
+import { Badge, Phone, Rotate3D, Users } from "lucide-react";
+import AryaPhoto from "@/assets/Members/Arya.png";
 import AmeetPhoto from "@/assets/Members/Ameet professional photo.jpg";
 import AditiPhoto from "@/assets/Members/Aditi Gandhi.jpg";
 import AmrutaPhoto from "@/assets/Members/Amruta Potdukhe.jpg";
+import AnushkaPhoto from "@/assets/Members/Anushka professional photo.jpg";
 import rotaractLogo from "@/assets/rotaract_logo_without_name.png";
-import ChaitanyaPhoto from "@/assets/Members/Rtr. Chaitanya.jpg";
+import SushantPhoto from "@/assets/Members/Sushant.jpeg";
 import ChaitraliPhoto from "@/assets/Members/Rtr. Chaitrali Dave.jpg";
 import DhanashriPhoto from "@/assets/Members/Dhanashri professional photo.jpg";
-import GeetaPhoto from "@/assets/Members/Rtr. Geeta wagh.jpg";
 import GovindPhoto from "@/assets/Members/Govind professional photo.jpg";
-import HarshadaPhoto from "@/assets/Members/Rtr Harshada.jpg";
-import AryaShindePhoto from "@/assets/Members/Rtr. Arya Shinde.jpg";
 import KushalPhoto from "@/assets/Members/Kushal Damore.jpg";
 import MonikaPhoto from "@/assets/Members/Monika Kshirsagar.jpg";
 import PragamaPhoto from "@/assets/Members/Rtr. Pragama Magotra.jpg";
-import PrajaktaPhoto from "@/assets/Members/Rtr. Prajakta .jpg";
-import PranjalPhoto from "@/assets/Members/Rtr. Pranjal landge.jpg";
 import PrayagPhoto from "@/assets/Members/Rtr. prayag.jpg";
 import PrernaPhoto from "@/assets/Members/Prerna Bhilare.jpg";
 import RajadnyaPhoto from "@/assets/Members/Rajadnya Khandale.jpg";
-import SaanaPhoto from "@/assets/Members/Rtr saana.jpg";
-import ShubhamPhoto from "@/assets/Members/Rtr. Shubham pawar.png";
-import ShubhankarPhoto from "@/assets/Members/Shubhankar Patil.jpg";
 import YogirajPhoto from "@/assets/Members/Yogiraj professional photo.jpg";
 
 interface MemberDetails {
   name: string;
   position: string;
   image?: string;
-  category: "core" | "bod" | "general";
+  category: "core" | "avenue" | "bod" | "general";
   bio?: string;
   instagram?: string;
   rotaryId?: string;
@@ -38,36 +33,29 @@ interface MemberDetails {
 }
 
 const allMembers: MemberDetails[] = [
-  { name: "Arya Chavan", position: "President", category: "core", bio: "Leads the club with a clear focus on purposeful service and shared ownership." },
+  { name: "Arya Chavan", position: "President", image: AryaPhoto, category: "core", bio: "Leads the club with a clear focus on purposeful service and shared ownership." },
   { name: "Chaitrali Dave", position: "Vice President", image: ChaitraliPhoto, category: "core", bio: "Supports the club’s direction by turning ideas into thoughtful, coordinated action." },
-  { name: "Amruta Potdukhe", position: "Secretary", image: AmrutaPhoto, category: "core", bio: "Keeps communication, planning, and follow-through moving with intention." },
-  { name: "Shubham Pawar", position: "Treasurer", image: ShubhamPhoto, category: "core", bio: "Brings structure and responsibility to the systems that support our impact." },
-  { name: "Pragama Magotra", position: "Immediate Past President & RRRO", image: PragamaPhoto, category: "core", bio: "Carries forward institutional memory while helping the next team grow with confidence." },
-  { name: "Prerna Bhilare", position: "Club Advisor", image: PrernaPhoto, category: "core", bio: "Offers perspective and continuity as the club moves between seasons of service." },
-  { name: "Rajadnya Khandale", position: "Jt. Secretary & CMD", image: RajadnyaPhoto, category: "bod", bio: "Connects administration with community-focused action and meaningful participation." },
-  { name: "Govind Choudhary", position: "Editor and Jt. Public Image Director", image: GovindPhoto, category: "bod", bio: "Shapes the visual voice of the club and helps its stories travel further." },
-  { name: "Yogiraj", position: "Sports Director – Indoor", image: YogirajPhoto, category: "bod" },
-  { name: "Ameet Bhosale", position: "Sports Director – Outdoor", image: AmeetPhoto, category: "bod" },
-  { name: "Monika Kshirsagar", position: "Club Service Director", image: MonikaPhoto, category: "bod" },
-  { name: "Chaitanya Gandhare", position: "Professional Assistance Officer", image: ChaitanyaPhoto, category: "bod" },
-  { name: "Shubhankar Patil", position: "International Service Director", image: ShubhankarPhoto, category: "bod" },
-  { name: "Arya Shinde", position: "Public Relations Officer", image: AryaShindePhoto, category: "bod" },
-  { name: "Kushal Damoor", position: "SAA & WRWC", image: KushalPhoto, category: "bod" },
+  { name: "Amruta Potdukhe", position: "Secretary & FD", image: AmrutaPhoto, category: "core", bio: "Keeps communication, planning, and follow-through moving with intention." },
+  { name: "Pragama Magotra", position: "IPP & RRIRO", image: PragamaPhoto, category: "core", bio: "Carries forward institutional memory while helping the next team grow with confidence." },
+  { name: "Prerna Bhilare", position: "Treasurer & CA", image: PrernaPhoto, category: "core", bio: "Offers perspective and continuity as the club moves between seasons of service." },
+  { name: "Rajadnya Khandale", position: "Jt. Secretary & CMD", image: RajadnyaPhoto, category: "core", bio: "Connects administration with community-focused action and meaningful participation." },
+  { name: "Ambika Chavan", position: "PDD & Editor", category: "avenue" },
+  { name: "Saini Devadiga", position: "Professional Assistance Officer (PAO)", category: "avenue" },
+  { name: "Anushka Chaudhari", position: "International Service Director (ISD)", image: AnushkaPhoto, category: "avenue" },
+  { name: "Govind Choudhary", position: "Jt. Editor", image: GovindPhoto, category: "bod", bio: "Shapes the visual voice of the club and helps its stories travel further." },
+  { name: "Yogiraj Apsingekar", position: "PID & SD", image: YogirajPhoto, category: "bod" },
+  { name: "Ameet Bhosale", position: "PRO & SD", image: AmeetPhoto, category: "bod" },
+  { name: "Monika Kshirsagar", position: "Club Service Director (CSD)", image: MonikaPhoto, category: "avenue" },
+  { name: "Kushal Damoor", position: "Sergeant At Arms", image: KushalPhoto, category: "bod" },
   { name: "Aditi Gandhi", position: "DEI Director", image: AditiPhoto, category: "bod" },
-  { name: "Harshada Shinde", position: "Jt. Public Relations Officer", image: HarshadaPhoto, category: "bod" },
-  { name: "Prajakta Munde", position: "Interact Rotaract Relations Officer", image: PrajaktaPhoto, category: "bod" },
-  { name: "Geeta Wagh", position: "Professional Development Director", image: GeetaPhoto, category: "bod" },
-  { name: "Prayag Pokale", position: "Membership Development Director", image: PrayagPhoto, category: "bod" },
-  { name: "Dhanashri Choudhari", position: "Public Image Director", image: DhanashriPhoto, category: "bod" },
-  { name: "Onkar Deshpande", position: "General Body Member", category: "general" },
-  { name: "Pranjal Landge", position: "General Body Member", image: PranjalPhoto, category: "general" },
-  { name: "Saana Nitnaware", position: "General Body Member", image: SaanaPhoto, category: "general" },
-  { name: "Nilesh More", position: "General Body Member", category: "general" },
-  { name: "Sushant Chavan", position: "General Body Member", category: "general" },
+  { name: "Prayag Pokale", position: "Membership Development Director (MDD)", image: PrayagPhoto, category: "bod" },
+  { name: "Dhanashri Chaudhari", position: "World Rotaract Week Chairperson (WRWC)", image: DhanashriPhoto, category: "bod" },
+  { name: "Sushant Chavan", position: "Website Co-Ordinator", image: SushantPhoto, category: "bod" },
 ];
 
-const sections: { key: "core" | "bod" | "general"; title: string; subtitle: string }[] = [
+const sections: { key: "core" | "avenue" | "bod" | "general"; title: string; subtitle: string }[] = [
   { key: "core", title: "Core Members", subtitle: "The executive leadership of our club" },
+  { key: "avenue", title: "Avenue Directors", subtitle: "Leaders coordinating the club’s service avenues" },
   { key: "bod", title: "Board of Directors", subtitle: "Directors driving each service avenue" },
   { key: "general", title: "General Body", subtitle: "The heartbeat of our community" },
 ];
@@ -76,28 +64,36 @@ const getInitials = (name: string) => name.split(" ").map((part) => part[0]).sli
 const displayName = (name: string) => name.startsWith("Rtr.") ? name : `Rtr. ${name}`;
 const displayFirstName = (name: string) => `Rtr. ${name.replace(/^Rtr\.\s*/, "").split(" ")[0]}`;
 const shortPosition = (position: string) => ({
-  "President": "Pres.",
-  "Vice President": "VP",
-  "Secretary": "Sec.",
-  "Treasurer": "Treas.",
-  "Immediate Past President": "IPP",
-  "Immediate Past President & RRRO": "IPP & RRRO",
+  "President": "President",
+  "Vice President": "Vice President",
+  "Secretary": "Secretary",
+  "Secretary & FD": "Secretary & FD",
+  "Treasurer": "Treasurer.",
+  "Treasurer & CA": "Treasurer & CA",
+  "IPP & RRIRO": "IPP & RRIRO",
   "Club Advisor": "Advisor",
-  "Jt. Secretary & CMD": "Jt. Sec. & CMD",
-  "Editor and Jt. Public Image Director": "Editor & Jt. PID",
-  "Sports Director – Indoor": "Sports Dir. – Indoor",
-  "Sports Director – Outdoor": "Sports Dir. – Outdoor",
+  "Jt. Secretary & CMD": "Jt. Secretary & CMD",
+  "PDD & Editor": "PDD & Editor",
+  "Jt. Editor": "Jt. Editor",
+  "Sports Director – Indoor": "SD – Indoor",
+  "Sports Director – Outdoor": "SD – Outdoor",
   "Club Service Director": "CSD",
+  "Club Service Director (CSD)": "CSD",
   "Professional Assistance Officer": "PAO",
+  "Professional Assistance Officer (PAO)": "PAO",
   "International Service Director": "ISD",
-  "Public Relations Officer": "PRO",
+  "International Service Director (ISD)": "ISD",
+  "PRO & SD": "PRO & SD",
+  "PID & SD": "PID & SD",
+  "Website Co-Ordinator": "Web Coordinator",
+  "Website Co-ordinator": "Web Coordinator",
   "SAA & WRWC": "SAA & WRWC",
+  "Sergeant At Arms": "SAA",
   "DEI Director": "DEI",
-  "Jt. Public Relations Officer": "Jt. PRO",
-  "Interact Rotaract Relations Officer": "IRRO",
   "Professional Development Director": "PDD",
   "Membership Development Director": "CMD",
-  "Public Image Director": "PID",
+  "Membership Development Director (MDD)": "MDD",
+  "World Rotaract Week Chairperson (WRWC)": "WRWC",
   "General Body Member": "GBM",
 }[position] ?? position);
 const demoContact = { instagram: "@member_demo", rotaryId: "RID-0001", phone: "+91 90000 00000" };
@@ -117,7 +113,7 @@ const MemberPhoto = ({ member }: { member: MemberDetails }) => (
 
 const MemberFooter = ({ member }: { member: MemberDetails }) => (
   <div className="flex min-h-[4.25rem] flex-col justify-center bg-card/40 p-2.5 backdrop-blur-md sm:min-h-[5.5rem] sm:p-3.5">
-    <p className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-primary sm:text-[10px] sm:tracking-wider"><span className="sm:hidden">{member.category === "core" ? member.position : shortPosition(member.position)}</span><span className="hidden sm:inline">{member.position}</span></p>
+    <p className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-primary sm:text-[10px] sm:tracking-wider">{shortPosition(member.position)}</p>
     <h3 className="line-clamp-2 text-[11px] font-semibold leading-tight sm:text-xs sm:leading-snug">{displayName(member.name)}</h3>
   </div>
 );
@@ -157,7 +153,7 @@ const MemberCard = React.memo(({ member, index }: { member: MemberDetails; index
               <h3 className="mt-2 text-base font-bold leading-tight sm:mt-3 sm:text-xl">{displayFirstName(member.name)}</h3>
               <p className="mt-1 text-[11px] font-medium leading-snug text-primary-foreground/80 sm:mt-2 sm:text-sm">{member.position}</p>
               <div className="mt-4 space-y-1.5 text-[10px] leading-tight text-primary-foreground/85 sm:mt-5 sm:text-[11px]">
-                <p className="flex items-center gap-1.5"><Instagram className="h-3 w-3 shrink-0" aria-hidden="true" />{member.instagram ?? demoContact.instagram}</p>
+                <p className="flex items-center gap-1.5"><SiInstagram className="h-3 w-3 shrink-0" aria-hidden="true" />{member.instagram ?? demoContact.instagram}</p>
                 <p className="flex items-center gap-1.5"><Badge className="h-3 w-3 shrink-0" aria-hidden="true" />{member.rotaryId ?? demoContact.rotaryId}</p>
                 <p className="flex items-center gap-1.5"><Phone className="h-3 w-3 shrink-0" aria-hidden="true" />{member.phone ?? demoContact.phone}</p>
               </div>

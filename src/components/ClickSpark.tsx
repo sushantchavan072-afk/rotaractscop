@@ -34,21 +34,20 @@ const ClickSpark = ({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const parent = canvas?.parentElement;
-    if (!canvas || !parent) return;
+    if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
 
     const resizeCanvas = () => {
-      const rect = parent.getBoundingClientRect();
-      const pixelRatio = window.devicePixelRatio || 1;
-      canvas.width = Math.max(1, Math.round(rect.width * pixelRatio));
-      canvas.height = Math.max(1, Math.round(rect.height * pixelRatio));
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(window.innerWidth * pixelRatio));
+      canvas.height = Math.max(1, Math.round(window.innerHeight * pixelRatio));
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
     };
 
-    const resizeObserver = new ResizeObserver(resizeCanvas);
-    resizeObserver.observe(parent);
     resizeCanvas();
+    window.addEventListener("resize", resizeCanvas, { passive: true });
 
     const ease = (value: number) => {
       switch (easing) {
@@ -70,14 +69,12 @@ const ClickSpark = ({
     };
 
     const draw = (timestamp: number) => {
-      const context = canvas.getContext("2d");
-      if (!context) return;
-
-      const pixelRatio = window.devicePixelRatio || 1;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
       context.lineCap = "round";
       context.lineWidth = 1.5;
+      const resolvedSparkColor = getResolvedSparkColor();
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const progress = (timestamp - spark.startTime) / duration;
@@ -91,7 +88,7 @@ const ClickSpark = ({
         const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
         const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
 
-        context.strokeStyle = getResolvedSparkColor();
+        context.strokeStyle = resolvedSparkColor;
         context.globalAlpha = 1 - eased;
         context.beginPath();
         context.moveTo(x1, y1);
@@ -117,7 +114,7 @@ const ClickSpark = ({
     (canvas as HTMLCanvasElement & { startAnimation?: () => void }).startAnimation = startAnimation;
 
     return () => {
-      resizeObserver.disconnect();
+      window.removeEventListener("resize", resizeCanvas);
       if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     };
@@ -153,7 +150,7 @@ const ClickSpark = ({
         ref={canvasRef}
         aria-hidden="true"
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
           zIndex: 100,
           width: "100%",

@@ -8,10 +8,10 @@ const DistrictTab = () => (
     <Card className="glass-panel shadow-xl border-border/50 overflow-hidden">
       <CardContent className="p-8 sm:p-12 space-y-8">
         <div>
-          <div className="flex flex-col items-start gap-3">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-3xl font-bold">Rotaract District 3131</h2>
-            <div className="flex h-24 w-48 items-center justify-center rounded-2xl bg-white p-3 shadow-sm dark:bg-white/95">
-              <img src={rotaractLogo} alt="Rotaract District 3131 Logo" className="max-h-full max-w-full object-contain" />
+            <div className="flex h-20 w-52 shrink-0 items-center justify-center sm:h-24 sm:w-60">
+              <img src={rotaractLogo} alt="Rotaract District 3131 Logo" className="h-full w-full object-contain" />
             </div>
           </div>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
